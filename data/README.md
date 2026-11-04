@@ -73,13 +73,13 @@ py -3.12 -m scripts.generate_data --output data/synthetic/reproduced
 py -3.12 -m scripts.validate_data --report evidence/A1-data-validation.json
 
 # 运行自动化验收
-py -3.12 -m unittest discover -s tests -v
+py -3.12 -m unittest discover -s tests -p test_data_preparation.py -v
 ```
 
 如果机器上没有 py 启动器，用对应 Python 可执行文件完整路径替换。确需替换目标目录中的六个 CSV 与 manifest 时，显式传 `--overwrite`；默认遇到已有目标文件直接失败，不会静默覆盖。该选项不递归删除目录，也不删除其他文件。写入中断后先核对 manifest 摘要，不能把半完成目录交给 B。
 
 ## A2 和 B 的接入方式
 
-A2 训练时明确只选六个特征列，标签仅取训练集的 `synthetic_default_label`。在 train 上拟合预处理与模型，在 test 上评估；reference 只用于固定监测分箱。模型训练属于下一步，本次没有保存模型文件。
+A2 已实现：训练时明确只选六个特征列，标签仅取训练集的 `synthetic_default_label`。在 train 上拟合预处理与模型，在 test 上评估；reference 只用于固定监测分箱。两个模型包、配置与实测结果见 [A2 交接记录](../docs/A2-完成记录与交接清单.md)。
 
 B 在 `evidence/A1-handoff-sample.json` 中检查已抽出的十条虚构样本，重点核对字段单位、金额精度、缺失含义、就业年限与年龄关系。机器校验已完成，B 的人工检查仍待其实际执行，不能代签。

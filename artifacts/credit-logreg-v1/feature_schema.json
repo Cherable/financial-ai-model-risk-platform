@@ -1,0 +1,65 @@
+{
+  "excluded_columns": [
+    "customer_ref",
+    "synthetic_default_label"
+  ],
+  "feature_order": [
+    "age",
+    "monthly_income",
+    "debt_income_ratio",
+    "past_due_count",
+    "loan_amount",
+    "employment_years"
+  ],
+  "features": [
+    {
+      "max": 80,
+      "min": 18,
+      "name": "age",
+      "nullable": true,
+      "type": "integer",
+      "unit": "years"
+    },
+    {
+      "max": 1000000,
+      "min": 0,
+      "name": "monthly_income",
+      "nullable": true,
+      "type": "decimal_string",
+      "unit": "CNY"
+    },
+    {
+      "max": 3,
+      "min": 0,
+      "name": "debt_income_ratio",
+      "nullable": true,
+      "type": "number",
+      "unit": "ratio"
+    },
+    {
+      "max": 100,
+      "min": 0,
+      "name": "past_due_count",
+      "nullable": true,
+      "type": "integer",
+      "unit": "count"
+    },
+    {
+      "max": 10000000,
+      "min": 0.01,
+      "name": "loan_amount",
+      "nullable": true,
+      "type": "decimal_string",
+      "unit": "CNY"
+    },
+    {
+      "max": 60,
+      "min": 0,
+      "name": "employment_years",
+      "nullable": true,
+      "type": "number",
+      "unit": "years"
+    }
+  ],
+  "schema_version": "1.0"
+}

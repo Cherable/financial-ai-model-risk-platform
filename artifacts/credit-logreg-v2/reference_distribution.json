@@ -1,0 +1,275 @@
+{
+  "binning": "fixed reference deciles; duplicate cutpoints removed",
+  "features": {
+    "age": {
+      "counts": [
+        86,
+        112,
+        101,
+        95,
+        103,
+        92,
+        105,
+        99,
+        106,
+        101
+      ],
+      "cutpoints": [
+        23.0,
+        31.0,
+        38.0,
+        44.0,
+        51.0,
+        56.0,
+        62.0,
+        69.0,
+        75.0
+      ],
+      "intervals": "[-infinity,c0),[c0,c1),...,[last,+infinity)",
+      "missing_count": 0,
+      "proportions_including_missing": [
+        0.086,
+        0.112,
+        0.101,
+        0.095,
+        0.103,
+        0.092,
+        0.105,
+        0.099,
+        0.106,
+        0.101,
+        0.0
+      ],
+      "total_count": 1000
+    },
+    "debt_income_ratio": {
+      "counts": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "cutpoints": [
+        0.16884180000000001,
+        0.24997520000000004,
+        0.3256626,
+        0.3991956,
+        0.4766285,
+        0.5637565999999999,
+        0.6520491000000002,
+        0.7649258,
+        0.9387889
+      ],
+      "intervals": "[-infinity,c0),[c0,c1),...,[last,+infinity)",
+      "missing_count": 0,
+      "proportions_including_missing": [
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.0
+      ],
+      "total_count": 1000
+    },
+    "employment_years": {
+      "counts": [
+        100,
+        99,
+        101,
+        100,
+        100,
+        98,
+        102,
+        100,
+        100,
+        100
+      ],
+      "cutpoints": [
+        1.1070000000000002,
+        2.99,
+        5.147,
+        8.042,
+        11.434999999999999,
+        15.27,
+        20.426000000000002,
+        26.55,
+        37.394
+      ],
+      "intervals": "[-infinity,c0),[c0,c1),...,[last,+infinity)",
+      "missing_count": 0,
+      "proportions_including_missing": [
+        0.1,
+        0.099,
+        0.101,
+        0.1,
+        0.1,
+        0.098,
+        0.102,
+        0.1,
+        0.1,
+        0.1,
+        0.0
+      ],
+      "total_count": 1000
+    },
+    "loan_amount": {
+      "counts": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "cutpoints": [
+        25967.166,
+        40784.704000000005,
+        56589.66300000001,
+        71598.16000000002,
+        92725.86,
+        114013.102,
+        144626.41400000002,
+        182668.74200000003,
+        239614.17600000006
+      ],
+      "intervals": "[-infinity,c0),[c0,c1),...,[last,+infinity)",
+      "missing_count": 0,
+      "proportions_including_missing": [
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.0
+      ],
+      "total_count": 1000
+    },
+    "monthly_income": {
+      "counts": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "cutpoints": [
+        3742.5330000000004,
+        4762.85,
+        5741.6720000000005,
+        6703.294,
+        7560.915,
+        8912.742,
+        10255.406,
+        12499.946000000004,
+        16395.233000000004
+      ],
+      "intervals": "[-infinity,c0),[c0,c1),...,[last,+infinity)",
+      "missing_count": 0,
+      "proportions_including_missing": [
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.0
+      ],
+      "total_count": 1000
+    },
+    "past_due_count": {
+      "counts": [
+        0,
+        760,
+        240
+      ],
+      "cutpoints": [
+        0.0,
+        1.0
+      ],
+      "intervals": "[-infinity,c0),[c0,c1),...,[last,+infinity)",
+      "missing_count": 0,
+      "proportions_including_missing": [
+        0.0,
+        0.76,
+        0.24,
+        0.0
+      ],
+      "total_count": 1000
+    }
+  },
+  "psi_epsilon": 1e-06,
+  "psi_smoothing": "add epsilon to each raw proportion, then renormalize separately",
+  "reference_csv_sha256": "366dedccdd29dec909f5d368c98ba3b026fcc1909a21fe248dd4bd9ddd765d42",
+  "reference_rows": 1000,
+  "risk_probability": {
+    "counts": [
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100
+    ],
+    "cutpoints": [
+      0.04419727555934176,
+      0.08516272430184829,
+      0.1320463801175606,
+      0.1815227950642237,
+      0.23951348072094936,
+      0.30557475491505814,
+      0.3702140178489581,
+      0.4549257984511571,
+      0.5983499131826382
+    ],
+    "intervals": "[-infinity,c0),[c0,c1),...,[last,+infinity)",
+    "missing_count": 0,
+    "proportions_including_missing": [
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.0
+    ],
+    "total_count": 1000
+  }
+}

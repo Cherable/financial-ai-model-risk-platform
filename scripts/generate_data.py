@@ -18,12 +18,10 @@ import platform
 import random
 from decimal import Decimal, ROUND_HALF_UP
 
+from app.modules.models.schema import FEATURES
+
 GENERATOR_VERSION = "1.0.0"
 DEFAULT_OUTPUT = Path(__file__).resolve().parents[1] / "data" / "synthetic" / "v1"
-FEATURES = (
-    "age", "monthly_income", "debt_income_ratio", "past_due_count",
-    "loan_amount", "employment_years",
-)
 LABEL = "synthetic_default_label"
 DATASETS = ("train", "test", "reference", "stream_normal", "stream_drift", "stream_missing")
 LABEL_FORMULA = (

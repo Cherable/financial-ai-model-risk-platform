@@ -7,6 +7,7 @@ __pycache__/
 .mypy_cache/
 .ruff_cache/
 tests/.a1-test-*/
+tests/.a2-test-*/
 .coverage
 htmlcov/
 
@@ -25,6 +26,8 @@ htmlcov/
 *.sqlite3
 *.sqlite3-*
 *.joblib
+!artifacts/credit-logreg-v1/pipeline.joblib
+!artifacts/credit-logreg-v2/pipeline.joblib
 *.pkl
 data/runtime/
 evidence/private/

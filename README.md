@@ -4,7 +4,23 @@
 
 英文项目名：Financial AI Model Risk Platform。仓库内容以中文设计文档为主，适用于金融科技与人工智能方向的双人课程项目。
 
-**当前交付状态：成员 A 的 A1 已完成，包含监测需求、可运行数据生成与校验工具、六组共 10,000 条合成数据及自动化验收。业务 API、模型训练、界面和 worker 尚未实现，系统性能指标仍待验证。**
+**当前交付状态：成员 A 的 A1、A2 已完成，包含 10,000 条合成数据、两个固定版本模型包、本地评分与解释、参考分布及 27 项通过的自动化测试。业务 API、界面、数据库留痕和 worker 尚未实现，系统性能指标仍待验证。**
+
+## A2 实施入口
+
+- [A2 完成记录、实测指标与交接](docs/A2-完成记录与交接清单.md)
+- [固定版本模型包说明](artifacts/README.md)
+- [评分示例输入](examples/A2-score-input.json)
+
+项目 `.venv` 已安装模型依赖，在根目录可执行：
+
+```powershell
+.\.venv\Scripts\python.exe -m scripts.verify_model --version credit-logreg-v1
+.\.venv\Scripts\python.exe -m scripts.score_model --version credit-logreg-v1 --input examples/A2-score-input.json
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
+```
+
+其他机器使用 [A2 锁文件](requirements-a2.lock.txt)安装依赖并核对 Python 版本；已交付模型的加载环境需与包内 environment.json 一致，详见 A2 说明。
 
 ## A1 实施入口
 
@@ -16,10 +32,10 @@
 
 ```powershell
 py -3.12 -m scripts.validate_data
-py -3.12 -m unittest discover -s tests -v
+py -3.12 -m unittest discover -s tests -p test_data_preparation.py -v
 ```
 
-本阶段只依赖 Python 标准库。默认数据已生成；重新生成请使用新的 `--output` 目录，详见数据说明。
+A1 的数据生成与校验只依赖 Python 标准库；A2 和完整测试需要模型依赖。默认数据已生成；重新生成请使用新的 `--output` 目录，详见数据说明。
 
 ## 文档导航
 
