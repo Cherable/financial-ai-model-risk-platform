@@ -1,0 +1,39 @@
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local secrets and editor settings
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+.idea/
+.vscode/
+
+# Runtime databases, model binaries and local exports
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.sqlite3-*
+*.joblib
+*.pkl
+data/runtime/
+evidence/private/
+exports/
+*.log
+
+# Generated files and OS metadata
+dist/
+build/
+*.egg-info/
+Thumbs.db
+.DS_Store
+~$*
