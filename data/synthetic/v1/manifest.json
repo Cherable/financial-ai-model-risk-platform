@@ -1,0 +1,362 @@
+{
+  "base_seed": 20261104,
+  "datasets": {
+    "reference": {
+      "filename": "reference.csv",
+      "has_label": false,
+      "missing_counts": {
+        "age": 0,
+        "debt_income_ratio": 0,
+        "employment_years": 0,
+        "loan_amount": 0,
+        "monthly_income": 0,
+        "past_due_count": 0
+      },
+      "missing_rates": {
+        "age": 0.0,
+        "debt_income_ratio": 0.0,
+        "employment_years": 0.0,
+        "loan_amount": 0.0,
+        "monthly_income": 0.0,
+        "past_due_count": 0.0
+      },
+      "numeric_summary": {
+        "age": {
+          "max": "80",
+          "mean": "49.765000",
+          "min": "18"
+        },
+        "debt_income_ratio": {
+          "max": "1.449509",
+          "mean": "0.517758",
+          "min": "0.016274"
+        },
+        "employment_years": {
+          "max": "58.13",
+          "mean": "15.467960",
+          "min": "0.00"
+        },
+        "loan_amount": {
+          "max": "961618.60",
+          "mean": "120732.017360",
+          "min": "5217.71"
+        },
+        "monthly_income": {
+          "max": "41517.61",
+          "mean": "9075.546450",
+          "min": "1500.00"
+        },
+        "past_due_count": {
+          "max": "4",
+          "mean": "0.302000",
+          "min": "0"
+        }
+      },
+      "row_count": 1000,
+      "seed": 11406819415153159434,
+      "sha256": "366dedccdd29dec909f5d368c98ba3b026fcc1909a21fe248dd4bd9ddd765d42"
+    },
+    "stream_drift": {
+      "filename": "stream_drift.csv",
+      "has_label": false,
+      "missing_counts": {
+        "age": 0,
+        "debt_income_ratio": 0,
+        "employment_years": 0,
+        "loan_amount": 0,
+        "monthly_income": 0,
+        "past_due_count": 0
+      },
+      "missing_rates": {
+        "age": 0.0,
+        "debt_income_ratio": 0.0,
+        "employment_years": 0.0,
+        "loan_amount": 0.0,
+        "monthly_income": 0.0,
+        "past_due_count": 0.0
+      },
+      "numeric_summary": {
+        "age": {
+          "max": "80",
+          "mean": "47.931000",
+          "min": "18"
+        },
+        "debt_income_ratio": {
+          "max": "2.206127",
+          "mean": "1.109860",
+          "min": "0.610901"
+        },
+        "employment_years": {
+          "max": "59.46",
+          "mean": "15.228500",
+          "min": "0.00"
+        },
+        "loan_amount": {
+          "max": "997337.06",
+          "mean": "115610.568320",
+          "min": "4542.04"
+        },
+        "monthly_income": {
+          "max": "23339.13",
+          "mean": "5004.563140",
+          "min": "1093.94"
+        },
+        "past_due_count": {
+          "max": "4",
+          "mean": "0.277000",
+          "min": "0"
+        }
+      },
+      "row_count": 1000,
+      "seed": 18348395989410501361,
+      "sha256": "819660efccc6c38c8ec28c64ae171b7e922540368285c6439b7163cb0212b386"
+    },
+    "stream_missing": {
+      "filename": "stream_missing.csv",
+      "has_label": false,
+      "missing_counts": {
+        "age": 0,
+        "debt_income_ratio": 0,
+        "employment_years": 0,
+        "loan_amount": 0,
+        "monthly_income": 100,
+        "past_due_count": 0
+      },
+      "missing_rates": {
+        "age": 0.0,
+        "debt_income_ratio": 0.0,
+        "employment_years": 0.0,
+        "loan_amount": 0.0,
+        "monthly_income": 0.1,
+        "past_due_count": 0.0
+      },
+      "numeric_summary": {
+        "age": {
+          "max": "80",
+          "mean": "48.943000",
+          "min": "18"
+        },
+        "debt_income_ratio": {
+          "max": "1.438906",
+          "mean": "0.496961",
+          "min": "0.004533"
+        },
+        "employment_years": {
+          "max": "59.70",
+          "mean": "15.516410",
+          "min": "0.00"
+        },
+        "loan_amount": {
+          "max": "773905.88",
+          "mean": "125193.134620",
+          "min": "3637.27"
+        },
+        "monthly_income": {
+          "max": "35801.84",
+          "mean": "9395.645067",
+          "min": "1527.11"
+        },
+        "past_due_count": {
+          "max": "4",
+          "mean": "0.297000",
+          "min": "0"
+        }
+      },
+      "row_count": 1000,
+      "seed": 13679309400644037687,
+      "sha256": "2d1baef533fa223d426b5f70edd29812ea214d5cf77bbf6ff2ff2e42dbc3e813"
+    },
+    "stream_normal": {
+      "filename": "stream_normal.csv",
+      "has_label": false,
+      "missing_counts": {
+        "age": 0,
+        "debt_income_ratio": 0,
+        "employment_years": 0,
+        "loan_amount": 0,
+        "monthly_income": 0,
+        "past_due_count": 0
+      },
+      "missing_rates": {
+        "age": 0.0,
+        "debt_income_ratio": 0.0,
+        "employment_years": 0.0,
+        "loan_amount": 0.0,
+        "monthly_income": 0.0,
+        "past_due_count": 0.0
+      },
+      "numeric_summary": {
+        "age": {
+          "max": "80",
+          "mean": "48.890000",
+          "min": "18"
+        },
+        "debt_income_ratio": {
+          "max": "1.602242",
+          "mean": "0.522183",
+          "min": "0.025147"
+        },
+        "employment_years": {
+          "max": "59.47",
+          "mean": "15.497990",
+          "min": "0.00"
+        },
+        "loan_amount": {
+          "max": "957689.83",
+          "mean": "119163.352730",
+          "min": "4231.78"
+        },
+        "monthly_income": {
+          "max": "46964.50",
+          "mean": "9102.783150",
+          "min": "1500.00"
+        },
+        "past_due_count": {
+          "max": "4",
+          "mean": "0.279000",
+          "min": "0"
+        }
+      },
+      "row_count": 1000,
+      "seed": 4435007294743104157,
+      "sha256": "08b04945f62d44b96ac2545967b1dfb296632263c2d24849c316c27b129dc80b"
+    },
+    "test": {
+      "filename": "test.csv",
+      "has_label": true,
+      "label_counts": {
+        "0": 741,
+        "1": 259
+      },
+      "missing_counts": {
+        "age": 0,
+        "debt_income_ratio": 0,
+        "employment_years": 0,
+        "loan_amount": 0,
+        "monthly_income": 0,
+        "past_due_count": 0
+      },
+      "missing_rates": {
+        "age": 0.0,
+        "debt_income_ratio": 0.0,
+        "employment_years": 0.0,
+        "loan_amount": 0.0,
+        "monthly_income": 0.0,
+        "past_due_count": 0.0
+      },
+      "numeric_summary": {
+        "age": {
+          "max": "80",
+          "mean": "49.275000",
+          "min": "18"
+        },
+        "debt_income_ratio": {
+          "max": "1.456825",
+          "mean": "0.500753",
+          "min": "0.004505"
+        },
+        "employment_years": {
+          "max": "59.61",
+          "mean": "15.501710",
+          "min": "0.00"
+        },
+        "loan_amount": {
+          "max": "1568800.36",
+          "mean": "116531.193390",
+          "min": "3874.85"
+        },
+        "monthly_income": {
+          "max": "75949.86",
+          "mean": "9124.824900",
+          "min": "1603.94"
+        },
+        "past_due_count": {
+          "max": "7",
+          "mean": "0.267000",
+          "min": "0"
+        }
+      },
+      "row_count": 1000,
+      "seed": 160407192014742420,
+      "sha256": "14159ed1a605313a949ee6a33cdc7c5f2fd6f1d5341442587e45ab47ea42846a"
+    },
+    "train": {
+      "filename": "train.csv",
+      "has_label": true,
+      "label_counts": {
+        "0": 3613,
+        "1": 1387
+      },
+      "missing_counts": {
+        "age": 0,
+        "debt_income_ratio": 0,
+        "employment_years": 0,
+        "loan_amount": 0,
+        "monthly_income": 0,
+        "past_due_count": 0
+      },
+      "missing_rates": {
+        "age": 0.0,
+        "debt_income_ratio": 0.0,
+        "employment_years": 0.0,
+        "loan_amount": 0.0,
+        "monthly_income": 0.0,
+        "past_due_count": 0.0
+      },
+      "numeric_summary": {
+        "age": {
+          "max": "80",
+          "mean": "49.098600",
+          "min": "18"
+        },
+        "debt_income_ratio": {
+          "max": "1.616908",
+          "mean": "0.514677",
+          "min": "0.001905"
+        },
+        "employment_years": {
+          "max": "59.87",
+          "mean": "15.388622",
+          "min": "0.00"
+        },
+        "loan_amount": {
+          "max": "1062234.08",
+          "mean": "117296.982710",
+          "min": "5671.18"
+        },
+        "monthly_income": {
+          "max": "71062.64",
+          "mean": "9104.102618",
+          "min": "1500.00"
+        },
+        "past_due_count": {
+          "max": "6",
+          "mean": "0.277600",
+          "min": "0"
+        }
+      },
+      "row_count": 5000,
+      "seed": 76680342625248594,
+      "sha256": "0d0132d7a1edd3c066ea2f8934fc727ed0716397b8de4b1fb70a7ef414540325"
+    }
+  },
+  "feature_columns": [
+    "age",
+    "monthly_income",
+    "debt_income_ratio",
+    "past_due_count",
+    "loan_amount",
+    "employment_years"
+  ],
+  "generator_version": "1.0.0",
+  "label_column": "synthetic_default_label",
+  "label_formula": "z = -2.4 + 2.4 * debt_income_ratio + 0.45 * past_due_count + 0.8 * min(loan_amount / (monthly_income * 12), 5) - 0.07 * employment_years; p = 1 / (1 + exp(-z)); label = Bernoulli(p)",
+  "missing_representation": "empty CSV field; convert to null/NaN when loading",
+  "parameters": {
+    "missing_rate": 0.1,
+    "sample_rows": 1000,
+    "train_rows": 5000
+  },
+  "python_version": "3.12.14",
+  "synthetic_only": true
+}

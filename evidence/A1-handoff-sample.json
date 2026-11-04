@@ -1,0 +1,132 @@
+{
+  "purpose": "A1 handoff sample for member B; human review pending",
+  "sampling_seed": 20261104,
+  "synthetic_only": true,
+  "sample_size": 10,
+  "samples": [
+    {
+      "dataset": "train",
+      "row": {
+        "customer_ref": "SYN-train-001713",
+        "age": "44",
+        "monthly_income": "22980.56",
+        "debt_income_ratio": "0.172594",
+        "past_due_count": "0",
+        "loan_amount": "194994.73",
+        "employment_years": "19.62",
+        "synthetic_default_label": "0"
+      }
+    },
+    {
+      "dataset": "train",
+      "row": {
+        "customer_ref": "SYN-train-002646",
+        "age": "33",
+        "monthly_income": "11089.04",
+        "debt_income_ratio": "0.115347",
+        "past_due_count": "0",
+        "loan_amount": "134482.39",
+        "employment_years": "9.33",
+        "synthetic_default_label": "0"
+      }
+    },
+    {
+      "dataset": "test",
+      "row": {
+        "customer_ref": "SYN-test-000380",
+        "age": "41",
+        "monthly_income": "5683.01",
+        "debt_income_ratio": "0.711874",
+        "past_due_count": "0",
+        "loan_amount": "60516.39",
+        "employment_years": "3.38",
+        "synthetic_default_label": "0"
+      }
+    },
+    {
+      "dataset": "test",
+      "row": {
+        "customer_ref": "SYN-test-000511",
+        "age": "42",
+        "monthly_income": "7739.76",
+        "debt_income_ratio": "0.605013",
+        "past_due_count": "0",
+        "loan_amount": "62872.57",
+        "employment_years": "7.96",
+        "synthetic_default_label": "0"
+      }
+    },
+    {
+      "dataset": "reference",
+      "row": {
+        "customer_ref": "SYN-reference-000606",
+        "age": "51",
+        "monthly_income": "3675.45",
+        "debt_income_ratio": "0.470667",
+        "past_due_count": "2",
+        "loan_amount": "39387.83",
+        "employment_years": "18.30"
+      }
+    },
+    {
+      "dataset": "stream_normal",
+      "row": {
+        "customer_ref": "SYN-stream_normal-000021",
+        "age": "69",
+        "monthly_income": "6486.02",
+        "debt_income_ratio": "0.106708",
+        "past_due_count": "0",
+        "loan_amount": "34039.82",
+        "employment_years": "7.20"
+      }
+    },
+    {
+      "dataset": "stream_drift",
+      "row": {
+        "customer_ref": "SYN-stream_drift-000234",
+        "age": "38",
+        "monthly_income": "6649.60",
+        "debt_income_ratio": "1.004988",
+        "past_due_count": "0",
+        "loan_amount": "181912.12",
+        "employment_years": "15.39"
+      }
+    },
+    {
+      "dataset": "stream_drift",
+      "row": {
+        "customer_ref": "SYN-stream_drift-000397",
+        "age": "41",
+        "monthly_income": "3855.95",
+        "debt_income_ratio": "1.021419",
+        "past_due_count": "0",
+        "loan_amount": "137518.23",
+        "employment_years": "4.42"
+      }
+    },
+    {
+      "dataset": "stream_missing",
+      "row": {
+        "customer_ref": "SYN-stream_missing-000002",
+        "age": "65",
+        "monthly_income": "",
+        "debt_income_ratio": "0.407757",
+        "past_due_count": "0",
+        "loan_amount": "19175.67",
+        "employment_years": "44.25"
+      }
+    },
+    {
+      "dataset": "stream_missing",
+      "row": {
+        "customer_ref": "SYN-stream_missing-000739",
+        "age": "31",
+        "monthly_income": "8302.78",
+        "debt_income_ratio": "0.498374",
+        "past_due_count": "0",
+        "loan_amount": "19367.12",
+        "employment_years": "0.09"
+      }
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+* text=auto eol=lf
+*.csv text eol=lf
+*.json text eol=lf
+*.joblib binary
+*.pkl binary

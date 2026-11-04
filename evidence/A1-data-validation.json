@@ -1,0 +1,98 @@
+{
+  "passed": true,
+  "synthetic_only": true,
+  "datasets": {
+    "train": {
+      "rows": 5000,
+      "missing_counts": {
+        "age": 0,
+        "monthly_income": 0,
+        "debt_income_ratio": 0,
+        "past_due_count": 0,
+        "loan_amount": 0,
+        "employment_years": 0
+      },
+      "monthly_income_mean": "9104.10",
+      "label_counts": {
+        "0": 3613,
+        "1": 1387
+      }
+    },
+    "test": {
+      "rows": 1000,
+      "missing_counts": {
+        "age": 0,
+        "monthly_income": 0,
+        "debt_income_ratio": 0,
+        "past_due_count": 0,
+        "loan_amount": 0,
+        "employment_years": 0
+      },
+      "monthly_income_mean": "9124.82",
+      "label_counts": {
+        "0": 741,
+        "1": 259
+      }
+    },
+    "reference": {
+      "rows": 1000,
+      "missing_counts": {
+        "age": 0,
+        "monthly_income": 0,
+        "debt_income_ratio": 0,
+        "past_due_count": 0,
+        "loan_amount": 0,
+        "employment_years": 0
+      },
+      "monthly_income_mean": "9075.55"
+    },
+    "stream_normal": {
+      "rows": 1000,
+      "missing_counts": {
+        "age": 0,
+        "monthly_income": 0,
+        "debt_income_ratio": 0,
+        "past_due_count": 0,
+        "loan_amount": 0,
+        "employment_years": 0
+      },
+      "monthly_income_mean": "9102.78"
+    },
+    "stream_drift": {
+      "rows": 1000,
+      "missing_counts": {
+        "age": 0,
+        "monthly_income": 0,
+        "debt_income_ratio": 0,
+        "past_due_count": 0,
+        "loan_amount": 0,
+        "employment_years": 0
+      },
+      "monthly_income_mean": "5004.56"
+    },
+    "stream_missing": {
+      "rows": 1000,
+      "missing_counts": {
+        "age": 0,
+        "monthly_income": 100,
+        "debt_income_ratio": 0,
+        "past_due_count": 0,
+        "loan_amount": 0,
+        "employment_years": 0
+      },
+      "monthly_income_mean": "9395.65"
+    }
+  },
+  "total_rows": 10000,
+  "checks": [
+    "sha256",
+    "schema_and_label_isolation",
+    "row_counts",
+    "feature_ranges",
+    "money_precision",
+    "unique_ids_and_feature_rows",
+    "exact_missing_counts",
+    "employment_age_consistency"
+  ],
+  "errors": []
+}
