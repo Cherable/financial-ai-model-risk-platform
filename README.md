@@ -4,7 +4,26 @@
 
 英文项目名：Financial AI Model Risk Platform。仓库内容以中文设计文档为主，适用于金融科技与人工智能方向的双人课程项目。
 
-**当前交付状态：成员 A 的 A1、A2 已完成，包含 10,000 条合成数据、两个固定版本模型包、本地评分与解释、参考分布及 27 项通过的自动化测试。业务 API、界面、数据库留痕和 worker 尚未实现，系统性能指标仍待验证。**
+**当前交付状态：成员 A 的 A1—A3 已完成。已具备合成数据、固定模型包、评分/激活 API、幂等处理及 SQLite 原子留痕，累计 55 项测试通过。B 的正式鉴权与存储集成、界面和 A4 worker 尚未完成，系统性能指标仍待验证。**
+
+## A3 实施入口
+
+- [A3 接口操作、事务语义与交接](docs/A3-接口操作与交接.md)
+- [当前完整依赖锁文件](requirements-a3.lock.txt)
+- [成功、失败与 outbox 的真实 HTTP 样例](evidence/A3-http-smoke.json)
+
+先按 A3 文档配置两枚本地演示令牌，再启动：
+
+```powershell
+.\.venv\Scripts\python.exe -m uvicorn app.main:create_app --factory --host 127.0.0.1 --port 8000
+```
+
+独立复验（脚本自建临时令牌、服务和数据库并自动关闭）：
+
+```powershell
+.\.venv\Scripts\python.exe -m scripts.verify_a3_http
+.\.venv\Scripts\python.exe -m scripts.run_acceptance
+```
 
 ## A2 实施入口
 

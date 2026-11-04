@@ -1,17 +1,25 @@
 """Pure local inference and an additive log-odds explanation."""
 
 import numpy as np
+from time import perf_counter
 from threadpoolctl import threadpool_limits
 
 from app.modules.models.bundle import ModelBundle
 from app.modules.models.schema import FEATURES, normalize_input, numeric_row
 
 
-def score_one(bundle: ModelBundle, raw: dict) -> dict:
+def score_one(bundle: ModelBundle, raw: dict, *, timing: dict | None = None) -> dict:
     normalized = normalize_input(raw)
     matrix = np.asarray([numeric_row(normalized)], dtype=np.float64)
     with threadpool_limits(limits=1):
-        probability = float(bundle.pipeline.predict_proba(matrix)[0, 1])
+        started = perf_counter()
+        if timing is not None:
+            timing["inference_attempted"] = True
+        try:
+            probability = float(bundle.pipeline.predict_proba(matrix)[0, 1])
+        finally:
+            if timing is not None:
+                timing["inference_ms"] = (perf_counter() - started) * 1000
         imputed = bundle.pipeline.named_steps["imputer"].transform(matrix)[0]
         transformed = bundle.pipeline.named_steps["scaler"].transform([imputed])[0]
         classifier = bundle.pipeline.named_steps["classifier"]

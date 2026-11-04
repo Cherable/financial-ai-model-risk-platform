@@ -8,6 +8,7 @@ __pycache__/
 .ruff_cache/
 tests/.a1-test-*/
 tests/.a2-test-*/
+tests/.a3-test-*/
 .coverage
 htmlcov/
 
