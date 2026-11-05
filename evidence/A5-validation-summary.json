@@ -1,0 +1,45 @@
+{
+  "date_shanghai": "2026-11-05",
+  "scope": "A1-A4 regression and A5 HTTP client, identity and Streamlit widget integration",
+  "environment": {
+    "python": "3.12.14",
+    "implementation": "CPython",
+    "system": "Windows",
+    "machine": "AMD64",
+    "packages": {
+      "cloudpickle": "3.1.2",
+      "joblib": "1.6.0",
+      "narwhals": "2.28.0",
+      "numpy": "2.5.4",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1",
+      "threadpoolctl": "3.7.0"
+    }
+  },
+  "api_packages": {
+    "fastapi": "0.162.0",
+    "uvicorn": "0.54.0",
+    "sqlalchemy": "2.0.57",
+    "httpx": "0.28.1",
+    "pydantic": "2.14.2",
+    "starlette": "1.10.0",
+    "anyio": "4.16.0"
+  },
+  "ui_packages": {
+    "streamlit": "1.66.1",
+    "pandas": "3.1.1",
+    "altair": "6.3.0"
+  },
+  "unit_and_integration_tests": {
+    "run": 108,
+    "passed": 108,
+    "failures": [],
+    "errors": [],
+    "skipped": 0,
+    "successful": true
+  },
+  "loopback_http_evidence_passed": true,
+  "member_b_real_integration": "pending; using replaceable SQLite and demo-token adapters",
+  "monitor_worker": "implemented as an independent process; metrics use durable consumed-event checkpoints",
+  "worker_process_evidence_passed": true
+}

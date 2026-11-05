@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "synthetic_data_only": true,
+  "entrypoint": "streamlit_app.py",
+  "browser_ui_actions": [
+    "connect",
+    "navigate_models_monitoring_alerts",
+    "acknowledge",
+    "close_with_note",
+    "refresh"
+  ],
+  "alert_final_status": "closed",
+  "action_states": [
+    "acknowledged",
+    "closed"
+  ],
+  "sample_count": 40,
+  "value": 0.25,
+  "rule_version": 1,
+  "threshold": 0.05,
+  "credential_exported": false
+}

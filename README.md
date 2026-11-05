@@ -4,7 +4,17 @@
 
 英文项目名：Financial AI Model Risk Platform。仓库内容以中文设计文档为主，适用于金融科技与人工智能方向的双人课程项目。
 
-**当前交付状态：成员 A 的 A1—A4 已完成。已具备数据、模型、评分/激活 API、原子留痕、独立监测 worker、规则与告警后端。累计 90 项测试通过；B 的正式平台集成和 A5 页面仍待完成，性能目标仍待实测。**
+**当前交付状态：成员 A 的 A1—A5 已完成。已具备数据、模型、评分/激活 API、独立监测 worker，以及模型、监测、告警页面。累计 108 项测试通过；B 的正式平台集成仍待完成，性能目标仍待实测。**
+
+## A5 实施入口
+
+- [页面启动、操作、重试语义与交接](docs/A5-页面操作与交接.md)
+- [业务与逻辑架构、一级数据流图](docs/A5-业务与逻辑架构.md)
+- [实际浏览器图文验证](docs/A5-图文验证记录.md)
+- [当前完整依赖锁文件](requirements-a5.lock.txt)
+- [A1—A5 全量回归结果](evidence/A5-validation-summary.json)
+
+启动 API 和 Worker 后，运行 `python -m streamlit run streamlit_app.py`，访问本地 8501 端口。隔离演示可运行 `python -m scripts.preview_a5`，详见 A5 操作说明。
 
 ## A4 实施入口
 
@@ -25,7 +35,7 @@ $env:ARTIFACT_ROOT = './artifacts'
 ## A3 实施入口
 
 - [A3 接口操作、事务语义与交接](docs/A3-接口操作与交接.md)
-- [当前完整依赖锁文件](requirements-a3.lock.txt)
+- [A3 历史依赖锁文件](requirements-a3.lock.txt)
 - [成功、失败与 outbox 的真实 HTTP 样例](evidence/A3-http-smoke.json)
 
 先按 A3 文档配置两枚本地演示令牌，再启动：

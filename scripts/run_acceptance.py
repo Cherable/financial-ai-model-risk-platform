@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--report", type=Path, default=ROOT / "evidence" / "A4-validation-summary.json")
+    parser.add_argument("--report", type=Path, default=ROOT / "evidence" / "A5-validation-summary.json")
     args = parser.parse_args()
     suite = unittest.defaultTestLoader.discover(str(ROOT / "tests"))
     result = unittest.TextTestRunner(stream=sys.stderr, verbosity=2).run(suite)
@@ -23,9 +23,10 @@ def main():
     worker_smoke = ROOT / "evidence" / "A4-worker-smoke.json"
     report = {
         "date_shanghai": datetime.now(timezone(timedelta(hours=8))).strftime("%Y-%m-%d"),
-        "scope": "A1-A3 regression and A4 durable monitoring worker/API integration",
+        "scope": "A1-A4 regression and A5 HTTP client, identity and Streamlit widget integration",
         "environment": environment(),
         "api_packages": {p: version(p) for p in ("fastapi", "uvicorn", "sqlalchemy", "httpx", "pydantic", "starlette", "anyio")},
+        "ui_packages": {p: version(p) for p in ("streamlit", "pandas", "altair")},
         "unit_and_integration_tests": {"run": result.testsRun,
             "passed": result.testsRun - len(result.failures) - len(result.errors) - len(result.skipped),
             "failures": [case.id() for case, _ in result.failures],

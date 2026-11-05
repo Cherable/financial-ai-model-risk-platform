@@ -1,4 +1,4 @@
-"""A4 API factory: uvicorn app.main:create_app --factory --host 127.0.0.1."""
+"""A5 API factory: uvicorn app.main:create_app --factory --host 127.0.0.1."""
 
 from contextlib import asynccontextmanager
 from typing import Annotated, Any
@@ -43,7 +43,7 @@ def create_app(settings: Settings | None = None, *, store=None, authenticator=No
         finally:
             store.close()
 
-    app = FastAPI(title="Financial AI Risk Platform A4", version="0.4.0", lifespan=lifespan)
+    app = FastAPI(title="Financial AI Risk Platform A5", version="0.5.0", lifespan=lifespan)
     app.state.store, app.state.service, app.state.predictor = store, service, predictor
     app.state.monitoring = monitoring
     bearer = HTTPBearer(auto_error=False)
@@ -76,6 +76,11 @@ def create_app(settings: Settings | None = None, *, store=None, authenticator=No
         ok = store.healthy()
         return JSONResponse(status_code=200 if ok else 503, content={"status": "ok" if ok else "unavailable",
                             "database": "reachable" if ok else "unavailable"})
+
+    @app.get("/api/v1/me")
+    def current_identity(actor=Depends(principal)):
+        return {"principal_id": actor.principal_id, "roles": sorted(actor.roles),
+                "model_ids": sorted(actor.model_ids)}
 
     @app.get("/api/v1/model-versions")
     def list_versions(actor=Depends(principal)):

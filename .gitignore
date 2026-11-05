@@ -37,6 +37,7 @@ exports/
 *.log
 
 # Generated files and OS metadata
+tests/.a5-test-*/
 dist/
 build/
 *.egg-info/
