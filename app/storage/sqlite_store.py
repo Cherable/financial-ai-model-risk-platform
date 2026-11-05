@@ -55,7 +55,8 @@ outbox = Table("outbox_events", metadata, Column("event_id", String, primary_key
                Column("event_type", String, nullable=False), Column("schema_version", String, nullable=False),
                Column("payload", JSON, nullable=False), Column("status", String, nullable=False),
                Column("attempts", Integer, nullable=False), Column("created_at", String, nullable=False),
-               Column("next_attempt_at", String), Column("lease_expires_at", String), Column("last_error", Text))
+               Column("next_attempt_at", String), Column("lease_expires_at", String), Column("last_error", Text),
+               Column("lease_token", String))
 activation_receipts = Table("activation_receipts", metadata,
                             Column("principal_id", String, primary_key=True), Column("route", String, primary_key=True),
                             Column("idempotency_key", String, primary_key=True), Column("request_sha256", String, nullable=False),

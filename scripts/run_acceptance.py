@@ -15,14 +15,15 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--report", type=Path, default=ROOT / "evidence" / "A3-validation-summary.json")
+    parser.add_argument("--report", type=Path, default=ROOT / "evidence" / "A4-validation-summary.json")
     args = parser.parse_args()
     suite = unittest.defaultTestLoader.discover(str(ROOT / "tests"))
     result = unittest.TextTestRunner(stream=sys.stderr, verbosity=2).run(suite)
     smoke = ROOT / "evidence" / "A3-http-smoke.json"
+    worker_smoke = ROOT / "evidence" / "A4-worker-smoke.json"
     report = {
         "date_shanghai": datetime.now(timezone(timedelta(hours=8))).strftime("%Y-%m-%d"),
-        "scope": "A1/A2 regression and A3 API/storage integration",
+        "scope": "A1-A3 regression and A4 durable monitoring worker/API integration",
         "environment": environment(),
         "api_packages": {p: version(p) for p in ("fastapi", "uvicorn", "sqlalchemy", "httpx", "pydantic", "starlette", "anyio")},
         "unit_and_integration_tests": {"run": result.testsRun,
@@ -32,7 +33,8 @@ def main():
             "successful": result.wasSuccessful()},
         "loopback_http_evidence_passed": json.loads(smoke.read_text(encoding="utf-8"))["passed"] if smoke.exists() else False,
         "member_b_real_integration": "pending; using replaceable SQLite and demo-token adapters",
-        "monitor_worker": "not implemented; outbox events remain pending",
+        "monitor_worker": "implemented as an independent process; metrics use durable consumed-event checkpoints",
+        "worker_process_evidence_passed": json.loads(worker_smoke.read_text(encoding="utf-8"))["passed"] if worker_smoke.exists() else False,
     }
     args.report.parent.mkdir(parents=True, exist_ok=True)
     with args.report.open("w", encoding="utf-8", newline="\n") as handle:

@@ -4,7 +4,23 @@
 
 英文项目名：Financial AI Model Risk Platform。仓库内容以中文设计文档为主，适用于金融科技与人工智能方向的双人课程项目。
 
-**当前交付状态：成员 A 的 A1—A3 已完成。已具备合成数据、固定模型包、评分/激活 API、幂等处理及 SQLite 原子留痕，累计 55 项测试通过。B 的正式鉴权与存储集成、界面和 A4 worker 尚未完成，系统性能指标仍待验证。**
+**当前交付状态：成员 A 的 A1—A4 已完成。已具备数据、模型、评分/激活 API、原子留痕、独立监测 worker、规则与告警后端。累计 90 项测试通过；B 的正式平台集成和 A5 页面仍待完成，性能目标仍待实测。**
+
+## A4 实施入口
+
+- [A4 运行、计算口径、恢复与验收](docs/A4-监测worker与验收.md)
+- [独立进程验收证据](evidence/A4-worker-smoke.json)
+- [完整回归结果](evidence/A4-validation-summary.json)
+
+先启动下方 A3 API，然后在同一项目目录的另一终端运行：
+
+```powershell
+$env:DATABASE_URL = 'sqlite:///./data/runtime/platform.db'
+$env:ARTIFACT_ROOT = './artifacts'
+.\.venv\Scripts\python.exe -m app.worker
+```
+
+独立复验使用 `python -m scripts.verify_a4_worker`；该脚本自建临时服务和凭据，包含明确标注的测试时钟推进，不是性能测试。
 
 ## A3 实施入口
 

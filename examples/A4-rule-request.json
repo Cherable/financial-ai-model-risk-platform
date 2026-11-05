@@ -1,0 +1,8 @@
+{
+  "model_version_id": "ef31e86c-44a0-5925-bb71-26c41da39d32",
+  "metric_name": "missing_rate",
+  "feature": "monthly_income",
+  "threshold": 0.1,
+  "min_samples": 20,
+  "effective_at": "2099-01-01T00:00:00Z"
+}

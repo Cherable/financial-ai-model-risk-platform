@@ -1,4 +1,4 @@
-"""A3 API factory: uvicorn app.main:create_app --factory --host 127.0.0.1."""
+"""A4 API factory: uvicorn app.main:create_app --factory --host 127.0.0.1."""
 
 from contextlib import asynccontextmanager
 from typing import Annotated, Any
@@ -14,6 +14,8 @@ from app.config import Settings
 from app.contracts import DomainError
 from app.demo_auth import DemoTokenAuthenticator
 from app.modules.scoring.service import LocalModelPredictor, PredictionService
+from app.modules.monitoring.routes import attach_routes
+from app.modules.monitoring.store import MonitoringStore
 from app.storage.sqlite_store import SqlitePredictionStore
 
 
@@ -23,23 +25,27 @@ class PredictionRequest(BaseModel):
     input: dict[str, Any] = Field(max_length=7)
 
 
-def create_app(settings: Settings | None = None, *, store=None, authenticator=None, predictor=None):
+def create_app(settings: Settings | None = None, *, store=None, authenticator=None, predictor=None, monitoring=None):
     settings = settings or Settings.from_env()
     authenticator = authenticator or DemoTokenAuthenticator(settings.admin_token, settings.scorer_token)
     store = store or SqlitePredictionStore(settings.database_url)
     predictor = predictor or LocalModelPredictor(settings.artifact_root, settings.inference_timeout_ms)
     service = PredictionService(store, predictor)
+    monitoring = monitoring or (MonitoringStore(store) if isinstance(store, SqlitePredictionStore) else None)
 
     @asynccontextmanager
     async def lifespan(_app):
         try:
             store.initialize(predictor.descriptors())
+            if monitoring is not None:
+                monitoring.initialize()
             yield
         finally:
             store.close()
 
-    app = FastAPI(title="Financial AI Risk Platform A3", version="0.3.0", lifespan=lifespan)
+    app = FastAPI(title="Financial AI Risk Platform A4", version="0.4.0", lifespan=lifespan)
     app.state.store, app.state.service, app.state.predictor = store, service, predictor
+    app.state.monitoring = monitoring
     bearer = HTTPBearer(auto_error=False)
 
     def principal(credentials: Annotated[HTTPAuthorizationCredentials | None, Depends(bearer)]):
@@ -83,4 +89,5 @@ def create_app(settings: Settings | None = None, *, store=None, authenticator=No
     def predict(body: PredictionRequest, actor=Depends(principal), key=Depends(idempotency_key)):
         return response(service.predict(actor, str(body.model_version_id), body.input, key))
 
+    attach_routes(app, principal, idempotency_key, store, monitoring)
     return app

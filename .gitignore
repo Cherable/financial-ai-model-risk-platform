@@ -9,6 +9,7 @@ __pycache__/
 tests/.a1-test-*/
 tests/.a2-test-*/
 tests/.a3-test-*/
+tests/.a4-test-*/
 .coverage
 htmlcov/
 
