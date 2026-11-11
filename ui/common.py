@@ -46,11 +46,13 @@ def mutate(path, body):
 
 
 def heading(title, description):
-    st.caption("FINANCIAL AI  /  MODEL RISK OBSERVATORY")
-    st.title(title)
-    st.write(description)
-    if st.button("刷新数据", key="refresh"):
-        st.rerun()
+    title_column, refresh_column = st.columns([3, 1], vertical_alignment="center")
+    with title_column:
+        st.title(title)
+    with refresh_column:
+        if st.button("刷新数据", key="refresh", width="stretch"):
+            st.rerun()
+    st.caption(description)
     st.caption(f"本次读取：{datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')} · 教学合成数据")
 
 
@@ -75,3 +77,5 @@ def pagination(prefix, size=30):
 METRICS = {"missing_rate": "特征缺失率", "feature_psi": "特征 PSI", "prediction_psi": "预测 PSI",
            "failure_rate": "推理失败率", "inference_p95": "推理延迟 P95"}
 FEATURES = ["age", "monthly_income", "debt_income_ratio", "past_due_count", "loan_amount", "employment_years"]
+FEATURE_NAMES = {"age": "年龄", "monthly_income": "月收入", "debt_income_ratio": "负债收入比",
+                 "past_due_count": "历史逾期次数", "loan_amount": "贷款金额", "employment_years": "工作年限"}

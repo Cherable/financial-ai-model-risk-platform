@@ -1,10 +1,11 @@
 """Start an isolated synthetic API/UI demo; Ctrl+C closes its child processes.
 
 Uses a test clock advance for settlement, never edits source timestamps.
-Credentials and database stay in ignored data/runtime/a5-preview/.
+By default each run keeps credentials and its database in a new data/runtime directory.
 """
 
 from datetime import timedelta
+import argparse
 import json
 import os
 from pathlib import Path
@@ -24,14 +25,19 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def main():
-    folder = ROOT / "data/runtime/a5-preview"
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--directory", type=Path, default=ROOT / f"data/runtime/a5-preview-{time.time_ns()}")
+    parser.add_argument("--api-port", type=int, default=18005)
+    parser.add_argument("--ui-port", type=int, default=18505)
+    args = parser.parse_args()
+    folder = args.directory.resolve()
     folder.mkdir(parents=True, exist_ok=True)
     if (folder / "platform.db").exists():
-        raise SystemExit("Preview database exists. Use a fresh -- no overwrite is performed. Rename data/runtime/a5-preview first.")
+        raise SystemExit("This preview directory already has a database. Run without --directory to create a new preview.")
     admin, scorer = secrets.token_urlsafe(48), secrets.token_urlsafe(48)
     env = {**os.environ, "DATABASE_URL": "sqlite:///" + (folder / "platform.db").as_posix(),
            "APP_ADMIN_TOKEN": admin, "APP_SCORER_TOKEN": scorer, "ARTIFACT_ROOT": str(ROOT / "artifacts"),
-           "API_BASE_URL": "http://127.0.0.1:18005"}
+           "API_BASE_URL": f"http://127.0.0.1:{args.api_port}"}
     flags = subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0
     processes, logs = [], []
 
@@ -44,7 +50,7 @@ def main():
         return child
 
     try:
-        start(["-m", "uvicorn", "app.main:create_app", "--factory", "--host", "127.0.0.1", "--port", "18005"], "api")
+        start(["-m", "uvicorn", "app.main:create_app", "--factory", "--host", "127.0.0.1", "--port", str(args.api_port)], "api")
         with httpx.Client(base_url=env["API_BASE_URL"], timeout=10, trust_env=False) as api:
             for _ in range(200):
                 try:
@@ -81,15 +87,15 @@ def main():
             alert_rows = api.get("/api/v1/alerts", headers=headers,
                                  params={"model_version_id": version_id, "limit": 100}).json()["items"]
             assert metric_rows and alert_rows
-            (ROOT / "evidence/A5-preview-seed.json").write_text(json.dumps({"passed": True, "synthetic_predictions": 40,
+            (folder / "seed-summary.json").write_text(json.dumps({"passed": True, "synthetic_predictions": 40,
                 "metrics": len(metric_rows), "alerts": len(alert_rows), "test_clock_advance_seconds": 120,
                 "source_timestamps_modified": False, "performance_benchmark": False}, indent=2) + "\n", encoding="utf-8")
         start(["-m", "app.worker"], "worker")
-        start(["-m", "streamlit", "run", "streamlit_app.py", "--server.address", "127.0.0.1", "--server.port", "18505",
+        start(["-m", "streamlit", "run", "streamlit_app.py", "--server.address", "127.0.0.1", "--server.port", str(args.ui_port),
                "--server.headless", "true", "--browser.gatherUsageStats", "false"], "ui")
         (folder / "credentials.json").write_text(json.dumps({"admin_token": admin, "scorer_token": scorer,
-            "url": "http://127.0.0.1:18505", "child_pids": [p.pid for p in processes]}), encoding="utf-8")
-        print("A5 preview ready: http://127.0.0.1:18505 ; credentials: data/runtime/a5-preview/credentials.json", flush=True)
+            "url": f"http://127.0.0.1:{args.ui_port}", "child_pids": [p.pid for p in processes]}), encoding="utf-8")
+        print(f"A5 preview ready at http://127.0.0.1:{args.ui_port}\nCredentials file {folder / 'credentials.json'}", flush=True)
         while all(p.poll() is None for p in processes):
             time.sleep(1)
     finally:

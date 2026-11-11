@@ -1,9 +1,10 @@
 from datetime import datetime, timedelta, timezone
 
 import pandas as pd
+import altair as alt
 import streamlit as st
 
-from ui.common import (FEATURES, METRICS, can_manage, client, heading, identity,
+from ui.common import (FEATURES, FEATURE_NAMES, METRICS, can_manage, client, heading, identity,
                        mutate, pagination, version_picker)
 
 
@@ -13,7 +14,8 @@ def render():
     if "admin" in identity()["roles"]:
         status = client().request("GET", "/api/v1/monitor/status")
         a, b, c = st.columns(3)
-        a.metric("Worker 状态", status["worker"]["state"])
+        worker_labels = {"fresh": "运行中", "stale": "心跳过期", "never_started": "尚未启动"}
+        a.metric("监测进程", worker_labels.get(status["worker"]["state"], status["worker"]["state"]))
         b.metric("待消费事件", status["queue"].get("pending", 0) + status["queue"].get("processing", 0))
         c.metric("隔离 / 失败窗口", f"{status['queue'].get('dead_letter', 0)} / {status['failed_windows']}")
         if status["worker"]["state"] != "fresh":
@@ -25,6 +27,33 @@ def render():
     if not rows:
         st.info("此页暂无指标。评分事件需由 Worker 消费，并在窗口结束 10 秒后结算。")
     else:
+        latest_window = max(row["window_start"] for row in rows)
+        current_rows = [row for row in rows if row["window_start"] == latest_window]
+        quality_column, drift_column = st.columns([3, 2])
+        with quality_column:
+            st.subheader("特征缺失率")
+            missing_rows = [{"特征": FEATURE_NAMES.get(row["feature"], row["feature"]), "缺失率": row["value"],
+                             "样本数": row["sample_count"]} for row in current_rows
+                            if row["metric_name"] == "missing_rate" and row["value"] is not None and not row["stale"]]
+            if missing_rows:
+                chart = alt.Chart(pd.DataFrame(missing_rows)).mark_bar(color="#237d96", cornerRadiusEnd=4).encode(
+                    x=alt.X("缺失率:Q", axis=alt.Axis(format=".0%"), scale=alt.Scale(domain=[0, 1])),
+                    y=alt.Y("特征:N", sort="-x", title=None), tooltip=["特征", alt.Tooltip("缺失率:Q", format=".1%"), "样本数"])
+                st.altair_chart(chart.properties(height=220), width="stretch")
+            else:
+                st.info("本页最新窗口暂无已结算的有效缺失率。")
+        with drift_column:
+            st.subheader("PSI 状态")
+            psi_rows = [row for row in current_rows if "psi" in row["metric_name"]]
+            ready_count = sum(row["status"] == "ready" and not row["stale"] for row in psi_rows)
+            st.metric("可计算 PSI 项目", f"{ready_count} / {len(psi_rows)}")
+            st.caption("成功样本达到 200 后计算 PSI。")
+            if any(row["status"] == "insufficient_samples" for row in psi_rows):
+                st.info("当前窗口成功样本不足 200，PSI 等待积累。")
+            if any(row["stale"] for row in current_rows):
+                st.warning("最新窗口有修订或事件待处理。")
+        st.caption(f"图表取本页最新窗口 {latest_window}，详细状态以指标表为准。")
+        st.subheader("窗口指标明细")
         selected = st.selectbox("指标类型", ["全部", *METRICS], format_func=lambda x: METRICS.get(x, x))
         shown = [r for r in rows if selected == "全部" or r["metric_name"] == selected]
         if any(r["stale"] for r in shown):
@@ -49,7 +78,8 @@ def render():
     st.subheader("规则版本")
     rule_offset = pagination("rules")
     rules = client().page("/api/v1/monitor-rules", version["model_version_id"], rule_offset)
-    st.dataframe(rules, hide_index=True, width="stretch")
+    st.dataframe(rules, hide_index=True, width="stretch",
+                 column_order=["metric_name", "feature", "rule_version", "threshold", "min_samples", "effective_at", "rule_id", "created_by"])
     st.caption("本表包含历史与未来规则；每个窗口按开始时间冻结规则，新增规则不修改历史窗口。")
     if can_manage():
         with st.expander("新增规则版本"):

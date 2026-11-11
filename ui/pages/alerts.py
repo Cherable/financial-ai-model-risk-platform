@@ -17,6 +17,10 @@ def render():
                    "数值": r["value"], "样本数": r["sample_count"], "处置状态": r["status"],
                    "当前仍触发": r["condition_active"], "规则版本": r["rule_snapshot"]["rule_version"]} for r in rows],
                   hide_index=True, width="stretch")
+    open_column, acknowledged_column, closed_column = st.columns(3)
+    open_column.metric("待认领（当前筛选）", sum(row["status"] == "open" for row in rows))
+    acknowledged_column.metric("处理中（当前筛选）", sum(row["status"] == "acknowledged" for row in rows))
+    closed_column.metric("已关闭（当前筛选）", sum(row["status"] == "closed" for row in rows))
     chosen = st.selectbox("查看告警证据", [r["alert_id"] for r in rows])
     detail = client().request("GET", f"/api/v1/alerts/{chosen}")
     rule = detail["rule_snapshot"]

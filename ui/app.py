@@ -19,11 +19,14 @@ def run():
     [data-testid="stSidebar"] {background: #eaf0f7;}
     h1,h2,h3 {color: #142e48;}
     [data-testid="stMetric"] {background: white; border: 1px solid #dce5ef; border-radius: 10px; padding: 16px;}
+    .block-container {padding-top: 2rem; padding-bottom: 3rem;}
+    [data-testid="stMetricValue"] {font-size: 1.7rem;}
+    [data-testid="stDataFrame"] {border-radius: 10px;}
     </style>""", unsafe_allow_html=True)
 
     with st.sidebar:
         st.header("◈ 风险观测台")
-        st.caption("模型治理 / 监测 / 告警处置")
+        st.caption("金融 AI 模型风险监测与审计平台")
 
     page = st.navigation([
         st.Page(models.render, title="模型版本", icon="📦", url_path="models", default=True),
@@ -60,7 +63,7 @@ def run():
         if st.button("退出连接"):
             st.session_state.clear()
             st.rerun()
-        st.info("60 秒 UTC 窗口 · 延迟 10 秒结算\n\n样本不足与待更新会单独标识。")
+        st.caption("窗口 60 秒 · UTC 时间\n\n窗口结束后 10 秒开始结算")
         st.caption("仅使用教学合成数据。阈值用于实验验证。")
 
     try:

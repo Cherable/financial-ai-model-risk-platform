@@ -8,7 +8,7 @@ def render():
     version, versions = version_picker()
     a, b, c = st.columns(3)
     a.metric("已登记版本", len(versions))
-    b.metric("当前版本", version["version"])
+    b.metric("当前版本", version["version"].removeprefix("credit-logreg-"))
     c.metric("服务状态", "已激活" if version["active"] else "未激活")
     st.subheader("版本登记簿")
     st.dataframe(versions, hide_index=True, width="stretch",
