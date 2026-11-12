@@ -44,3 +44,11 @@ build/
 Thumbs.db
 .DS_Store
 ~$*
+
+# uv 管理的项目内 Python 3.12.14
+.python/
+
+# 课程提供的报告模板与本地预览产物（模板不随仓库分发）
+report/报告模板.doc
+report/报告模板.docx
+report/preview.pdf
