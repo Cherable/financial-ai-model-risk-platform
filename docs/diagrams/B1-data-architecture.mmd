@@ -1,0 +1,13 @@
+flowchart LR
+  PKG["模型包目录<br/>artifacts/credit-logreg-v1、v2"]
+  M["<b>模型与版本域</b><br/>models<br/>model_versions<br/>model_activations<br/>activation_receipts"]
+  S["<b>评分证据域</b><br/>（只追加）<br/>input_snapshots<br/>predictions<br/>audit_logs<br/>outbox_events"]
+  N["<b>监测与告警域</b><br/>（按窗口修订）<br/>monitor_rules<br/>monitor_windows<br/>processed_events<br/>metrics、metric_revisions<br/>alerts、alert_revisions<br/>alert_actions<br/>monitor_receipts<br/>monitor_worker_state"]
+  A["<b>身份与审计域</b><br/>（B 实现）<br/>users、roles、user_roles<br/>model_access<br/>replay_runs<br/>audit_exports"]
+
+  PKG -->|"启动登记 版本与摘要"| M
+  M -->|"激活版本 与参考分布"| S
+  S -->|"outbox 完成事件"| N
+  S -.->|"设计 审计证据查询"| A
+  N -.->|"设计 告警与复现证据"| A
+  A -.->|"设计 授权范围"| S

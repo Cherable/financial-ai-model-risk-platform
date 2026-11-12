@@ -1,0 +1,24 @@
+%%{init: {"flowchart": {"wrappingWidth": 500, "nodeSpacing": 30, "rankSpacing": 45}}}%%
+flowchart TB
+  B["浏览器　现代 JavaScript / Vega-Lite 渲染"]
+  subgraph HOST["演示主机　Windows 11 · CPython 3.12.14 · AMD64 · 全部绑定回环地址"]
+    P3["<b>页面进程</b><br/>streamlit run streamlit_app.py<br/>127.0.0.1:8501"]
+    P1["<b>API 进程</b><br/>uvicorn app.main:create_app --factory<br/>127.0.0.1:8000"]
+    P2["<b>监测 Worker 进程</b><br/>python -m app.worker<br/>轮询 5 秒 · 单轮至多 100 事件 / 20 窗口"]
+    subgraph FILE["共享文件系统"]
+      DB[("运行数据库<br/>data/runtime/platform.db<br/>SQLite · WAL · 外键启用")]
+      ART["模型包目录 artifacts/<br/>trusted_registry.json<br/>credit-logreg-v1、v2"]
+      DATA["合成数据 data/synthetic/v1<br/>六组 CSV + manifest"]
+      EV["验证记录 evidence/"]
+    end
+    OFF["<b>离线脚本</b>　scripts/<br/>generate_data · train_model<br/>verify_* · replay_events"]
+  end
+  B -->|"HTTP 8501"| P3
+  P3 -->|"HTTP/JSON · Bearer · 幂等键"| P1
+  P1 --> DB
+  P1 --> ART
+  P2 --> DB
+  P2 --> ART
+  OFF -.->|生成| DATA
+  OFF -.->|训练并封装| ART
+  OFF -.->|写入| EV
