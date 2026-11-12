@@ -14,6 +14,8 @@ class Settings:
     admin_token: str = field(default="", repr=False)
     scorer_token: str = field(default="", repr=False)
     inference_timeout_ms: float = 2000.0
+    jwt_secret: str = field(default="", repr=False)
+    token_ttl_minutes: int = 30
 
     @classmethod
     def from_env(cls):
@@ -21,4 +23,6 @@ class Settings:
                    artifact_root=Path(os.getenv("ARTIFACT_ROOT", str(DEFAULT_ARTIFACT_ROOT))),
                    admin_token=os.getenv("APP_ADMIN_TOKEN", ""),
                    scorer_token=os.getenv("APP_SCORER_TOKEN", ""),
-                   inference_timeout_ms=float(os.getenv("INFERENCE_TIMEOUT_MS", "2000")))
+                   inference_timeout_ms=float(os.getenv("INFERENCE_TIMEOUT_MS", "2000")),
+                   jwt_secret=os.getenv("JWT_SECRET", ""),
+                   token_ttl_minutes=int(os.getenv("TOKEN_TTL_MINUTES", "30")))

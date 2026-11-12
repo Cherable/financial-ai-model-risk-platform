@@ -14,6 +14,7 @@ from app.modules.models.bundle import load_bundle
 from app.modules.monitoring.statistics import calculate
 from app.modules.monitoring.store import InvalidEvent, LeaseLost, MonitoringStore
 from app.modules.monitoring.time_utils import now_utc
+from app.modules.replay.service import ReplayService
 from app.storage.sqlite_store import SqlitePredictionStore
 
 
@@ -89,9 +90,13 @@ def main():
             print(json.dumps(store.retry_failed(kind, str(args.retry_event or args.retry_window), args.reason, now_utc())))
             return
         worker = MonitoringWorker(store, settings.artifact_root)
+        replay = ReplayService(base.engine, settings.artifact_root)
         while True:
             try:
                 print(json.dumps(worker.run_once(args.max_events)), flush=True)
+                replay_result = replay.process_pending()
+                if replay_result["claimed"]:
+                    print(json.dumps({"replay": replay_result}), flush=True)
             except (StorageUnavailable, SQLAlchemyError):
                 print(json.dumps({"error": "STORAGE_UNAVAILABLE"}), flush=True)
                 if args.once:

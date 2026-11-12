@@ -10,6 +10,9 @@ from fastapi.responses import JSONResponse
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from pydantic import BaseModel, ConfigDict, Field
 
+from app.auth.routes import attach_routes as attach_auth_routes
+from app.auth.service import JwtAuthService
+from app.auth.store import AuthStore
 from app.config import Settings
 from app.contracts import DomainError
 from app.demo_auth import DemoTokenAuthenticator
@@ -27,9 +30,16 @@ class PredictionRequest(BaseModel):
 
 def create_app(settings: Settings | None = None, *, store=None, authenticator=None, predictor=None, monitoring=None):
     settings = settings or Settings.from_env()
-    authenticator = authenticator or DemoTokenAuthenticator(settings.admin_token, settings.scorer_token)
     store = store or SqlitePredictionStore(settings.database_url)
     predictor = predictor or LocalModelPredictor(settings.artifact_root, settings.inference_timeout_ms)
+    auth_service = None
+    if authenticator is None:
+        if settings.jwt_secret and getattr(store, "engine", None) is not None:
+            auth_service = JwtAuthService(AuthStore(store.engine), settings.jwt_secret,
+                                          settings.token_ttl_minutes)
+            authenticator = auth_service
+        else:
+            authenticator = DemoTokenAuthenticator(settings.admin_token, settings.scorer_token)
     service = PredictionService(store, predictor)
     monitoring = monitoring or (MonitoringStore(store) if isinstance(store, SqlitePredictionStore) else None)
 
@@ -39,6 +49,8 @@ def create_app(settings: Settings | None = None, *, store=None, authenticator=No
             store.initialize(predictor.descriptors())
             if monitoring is not None:
                 monitoring.initialize()
+            if auth_service is not None:
+                auth_service.store.seed_roles()
             yield
         finally:
             store.close()
@@ -95,4 +107,14 @@ def create_app(settings: Settings | None = None, *, store=None, authenticator=No
         return response(service.predict(actor, str(body.model_version_id), body.input, key))
 
     attach_routes(app, principal, idempotency_key, store, monitoring)
+    if auth_service is not None:
+        attach_auth_routes(app, auth_service, principal)
+    if getattr(store, "engine", None) is not None:
+        from app.modules.audit.routes import attach_routes as attach_audit_routes
+        from app.modules.replay.routes import attach_routes as attach_replay_routes
+        from app.modules.replay.service import ReplayService
+        attach_audit_routes(app, principal, store.engine)
+        replay_service = ReplayService(store.engine, settings.artifact_root)
+        attach_replay_routes(app, principal, idempotency_key, replay_service)
+        app.state.replay = replay_service
     return app
