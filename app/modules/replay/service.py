@@ -41,7 +41,8 @@ class ReplayService:
     def create(self, actor, prediction_id: str) -> dict:
         if not (REPLAY_ROLES & set(actor.roles)):
             raise DomainError(403, "FORBIDDEN", "Auditor or administrator role required.")
-        with self.engine.connect() as conn:
+        with self.engine.begin() as conn:
+            conn.exec_driver_sql("BEGIN IMMEDIATE")
             prediction = conn.execute(select(predictions)
                                       .where(predictions.c.prediction_id == prediction_id)).mappings().first()
             if prediction is None:
@@ -53,10 +54,9 @@ class ReplayService:
             active = conn.execute(select(replay_runs.c.replay_id)
                                   .where(replay_runs.c.prediction_id == prediction_id,
                                          replay_runs.c.status.in_(("pending", "running")))).first()
-        if active is not None:
-            raise DomainError(409, "REPLAY_ALREADY_RUNNING", "a replay task is already pending")
-        replay_id = str(uuid4())
-        with self.engine.begin() as conn:
+            if active is not None:
+                raise DomainError(409, "REPLAY_ALREADY_RUNNING", "a replay task is already pending")
+            replay_id = str(uuid4())
             conn.execute(insert(replay_runs).values(
                 replay_id=replay_id, prediction_id=prediction_id,
                 model_version_id=prediction["model_version_id"], environment_check="pending",

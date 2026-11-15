@@ -7,7 +7,7 @@ import csv
 import hashlib
 import io
 import json
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from uuid import NAMESPACE_URL, uuid4, uuid5
 
 from sqlalchemy import and_, insert, select
@@ -110,12 +110,13 @@ def search(engine, actor, *, model_version_id, start, end, status, offset, limit
         raise DomainError(422, "INVALID_RANGE", "from and to must be ISO 8601 timestamps") from None
     if end_dt <= start_dt:
         raise DomainError(422, "INVALID_RANGE", "to must be later than from")
-    if (end_dt - start_dt).days > MAX_RANGE_DAYS:
+    if end_dt - start_dt > timedelta(days=MAX_RANGE_DAYS):
         raise DomainError(422, "RANGE_TOO_WIDE", f"time range must not exceed {MAX_RANGE_DAYS} days")
     conditions = [predictions.c.request_received_at >= stamp(start_dt),
                   predictions.c.request_received_at < stamp(end_dt)]
     if model_version_id:
-        model_id = model_id_of(engine.connect(), model_version_id)
+        with engine.connect() as conn:
+            model_id = model_id_of(conn, model_version_id)
         if model_id is None:
             raise DomainError(404, "VERSION_NOT_FOUND", "model version does not exist")
         require_scope(actor, model_id)

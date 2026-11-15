@@ -51,3 +51,7 @@ urllib3==2.8.0
 uvicorn==0.54.0
 watchdog==6.0.0
 websockets==17.4
+
+# Argon2 transitive dependencies verified during B review
+cffi==2.1.1
+pycparser==3.12

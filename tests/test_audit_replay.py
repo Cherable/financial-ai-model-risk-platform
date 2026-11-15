@@ -138,6 +138,19 @@ class SearchTests(AuditReplayBase):
         self.assertEqual(403, self.client.get("/api/v1/audit/records", params=self.RANGE,
                                               headers=self.headers("risk")).status_code)
 
+    def test_range_rejects_31_days_plus_one_second(self):
+        response = self.client.get("/api/v1/audit/records",
+            params={"from": "2026-01-01T00:00:00Z", "to": "2026-02-01T00:00:01Z"},
+            headers=self.headers("auditor"))
+        self.assertEqual(422, response.status_code)
+
+    def test_version_search_releases_connection(self):
+        for _ in range(20):
+            response = self.client.get("/api/v1/audit/records",
+                params={**self.RANGE, "model_version_id": VERSION_ID}, headers=self.headers("auditor"))
+            self.assertEqual(200, response.status_code)
+        self.assertEqual(0, self.engine.pool.checkedout())
+
     def test_status_filter(self):
         response = self.client.get("/api/v1/audit/records", params={**self.RANGE, "status": "failed"},
                                    headers=self.headers("auditor"))
@@ -185,6 +198,16 @@ class ReplayTests(AuditReplayBase):
         self.assertEqual(self.prediction_id, first.json()["prediction_id"])
         self.assertEqual(VERSION_ID, first.json()["model_version_id"])
         self.assertEqual(409, self.create(key="key-2").status_code)
+
+    def test_concurrent_creation_returns_one_conflict(self):
+        from concurrent.futures import ThreadPoolExecutor
+        headers = self.headers("auditor")
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            responses = list(pool.map(lambda key: self.create(headers=headers, key=key), ["parallel-1", "parallel-2"]))
+        self.assertEqual([201, 409], sorted(response.status_code for response in responses))
+        with self.engine.connect() as conn:
+            rows = conn.execute(select(replay_runs).where(replay_runs.c.prediction_id == self.prediction_id)).all()
+        self.assertEqual(1, len(rows))
 
     def test_non_auditor_cannot_create(self):
         self.assertEqual(403, self.create(headers=self.headers("risk")).status_code)
