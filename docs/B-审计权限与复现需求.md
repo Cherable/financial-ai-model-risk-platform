@@ -4,7 +4,7 @@
 
 **范围声明**：本文描述 B 的设计方案，对应 `docs/04` 第 6 节已冻结的接口清单与 `docs/05` 的 ASR-03、ASR-04。
 
-2026 年 11 月 12 日更新：FR10—FR17 已在 `B/audit-platform` 分支实现，并有 34 项自动化测试覆盖（`tests/test_auth.py`、`tests/test_audit_replay.py`）。FR18、FR19（审计与复现页面）尚未实现。复现的真实执行路径已在项目内 CPython 3.12.14 环境端到端验证：原评分 0.308812，复现误差 0.0，阈值判断一致，环境校验为 verified。合并进需求说明书时，应同步更新第 10 章的进度描述。
+2026 年 11 月 12 日更新：FR10—FR17 已在 `B/audit-platform` 分支实现，并有 42 项自动化测试覆盖（`tests/test_auth.py`、`tests/test_audit_replay.py`、`tests/test_replay_real.py`、`tests/test_ui_audit_replay.py`）。FR18、FR19 两个页面已实现，见 `ui/pages/audit.py` 与 `ui/pages/replay.py`。复现的真实执行路径已在项目内 CPython 3.12.14 环境端到端验证：原评分 0.308812，复现误差 0.0，阈值判断一致，环境校验为 verified。合并进需求说明书时，应同步更新第 10 章的进度描述。
 
 ## 11 身份与访问控制
 

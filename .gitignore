@@ -52,3 +52,6 @@ Thumbs.db
 report/报告模板.doc
 report/报告模板.docx
 report/preview.pdf
+
+# 本地浏览器预览配置
+.claude/
