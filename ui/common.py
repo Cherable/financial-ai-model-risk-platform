@@ -12,12 +12,21 @@ def client():
     return ApiClient(os.environ.get("API_BASE_URL", "http://127.0.0.1:8000"), st.session_state["token"])
 
 
+def login(username, password):
+    """账号登录在拿到令牌前调用，因此不读取会话令牌。"""
+    return ApiClient(os.environ.get("API_BASE_URL", "http://127.0.0.1:8000"), "").login(username, password)
+
+
 def identity():
     return st.session_state["identity"]
 
 
 def can_manage():
     return bool(set(identity()["roles"]) & {"admin", "risk_manager"})
+
+
+def can_audit():
+    return bool(set(identity()["roles"]) & {"auditor", "admin"})
 
 
 def error(exc):

@@ -10,7 +10,7 @@ import streamlit as st
 
 from ui.api_client import ApiError
 from ui import common
-from ui.pages import alerts, models, monitoring
+from ui.pages import alerts, audit, models, monitoring, replay
 
 def run():
     st.set_page_config(page_title="金融 AI · 风险观测台", page_icon="📊", layout="wide")
@@ -32,21 +32,29 @@ def run():
         st.Page(models.render, title="模型版本", icon="📦", url_path="models", default=True),
         st.Page(monitoring.render, title="监测指标", icon="📈", url_path="monitoring"),
         st.Page(alerts.render, title="告警处置", icon="🚩", url_path="alerts"),
+        st.Page(audit.render, title="审计查询", icon="🔍", url_path="audit"),
+        st.Page(replay.render, title="复现任务", icon="🧪", url_path="replay"),
     ])
 
     if "token" not in st.session_state:
         st.title("连接风险观测台")
-        st.write("输入服务端配置的演示访问令牌。正式账号登录由成员 B 后续接入。")
+        st.write("使用正式账号登录；未配置账号体系的服务仍可输入演示访问令牌。")
         with st.form("connect", clear_on_submit=True):
             token = st.text_input("访问令牌", type="password")
+            with st.expander("使用账号登录"):
+                username = st.text_input("用户名")
+                password = st.text_input("密码", type="password")
             submitted = st.form_submit_button("连接", type="primary")
         if submitted:
-            st.session_state["token"] = token
             try:
+                if username.strip() and password:
+                    st.session_state["token"] = common.login(username.strip(), password)["access_token"]
+                else:
+                    st.session_state["token"] = token
                 st.session_state["identity"] = common.client().request("GET", "/api/v1/me")
             except ApiError:
                 st.session_state.clear()
-                st.error("连接失败，请检查令牌及 API 服务。")
+                st.error("连接失败，请检查账号或令牌及 API 服务。")
             else:
                 st.rerun()
         st.stop()
