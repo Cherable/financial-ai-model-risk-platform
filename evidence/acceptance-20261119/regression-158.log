@@ -1,0 +1,215 @@
+C:\Users\a1632\Desktop\软件架构与设计\金融AI模型风险监测与审计平台\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa
+test_auditor_sees_raw_input_and_evidence_chain (test_audit_replay.EvidenceTests.test_auditor_sees_raw_input_and_evidence_chain) ... ok
+test_missing_prediction_is_404 (test_audit_replay.EvidenceTests.test_missing_prediction_is_404) ... ok
+test_model_outside_scope_is_forbidden (test_audit_replay.EvidenceTests.test_model_outside_scope_is_forbidden) ... ok
+test_other_roles_get_reduced_view (test_audit_replay.EvidenceTests.test_other_roles_get_reduced_view) ... ok
+test_csv_export_has_bom_and_format (test_audit_replay.ExportTests.test_csv_export_has_bom_and_format) ... ok
+test_export_of_out_of_scope_record_is_forbidden (test_audit_replay.ExportTests.test_export_of_out_of_scope_record_is_forbidden) ... ok
+test_json_export_matches_database_and_is_recorded (test_audit_replay.ExportTests.test_json_export_matches_database_and_is_recorded) ... ok
+test_concurrent_creation_returns_one_conflict (test_audit_replay.ReplayTests.test_concurrent_creation_returns_one_conflict) ... ok
+test_concurrent_same_key_returns_one_task (test_audit_replay.ReplayTests.test_concurrent_same_key_returns_one_task) ... ok
+test_create_and_duplicate (test_audit_replay.ReplayTests.test_create_and_duplicate) ... ok
+test_mismatch_run (test_audit_replay.ReplayTests.test_mismatch_run) ... ok
+test_non_auditor_cannot_create (test_audit_replay.ReplayTests.test_non_auditor_cannot_create) ... ok
+test_package_failure_is_reported (test_audit_replay.ReplayTests.test_package_failure_is_reported) ... ok
+test_passed_run (test_audit_replay.ReplayTests.test_passed_run) ... ok
+test_replay_uses_the_original_version (test_audit_replay.ReplayTests.test_replay_uses_the_original_version) ... ok
+test_restart_recovers_claimed_task (test_audit_replay.ReplayTests.test_restart_recovers_claimed_task) ... ok
+test_same_key_other_prediction_conflicts (test_audit_replay.ReplayTests.test_same_key_other_prediction_conflicts) ... ok
+test_same_key_returns_task_after_completion (test_audit_replay.ReplayTests.test_same_key_returns_task_after_completion) ... ok
+test_limit_above_100_is_rejected (test_audit_replay.SearchTests.test_limit_above_100_is_rejected) ... ok
+test_range_rejects_31_days_plus_one_second (test_audit_replay.SearchTests.test_range_rejects_31_days_plus_one_second) ... ok
+test_risk_manager_cannot_search (test_audit_replay.SearchTests.test_risk_manager_cannot_search) ... ok
+test_search_returns_authorized_records_only (test_audit_replay.SearchTests.test_search_returns_authorized_records_only) ... ok
+test_status_filter (test_audit_replay.SearchTests.test_status_filter) ... ok
+test_time_range_is_mandatory_and_bounded (test_audit_replay.SearchTests.test_time_range_is_mandatory_and_bounded) ... ok
+test_version_search_releases_connection (test_audit_replay.SearchTests.test_version_search_releases_connection) ... ok
+test_admin_can_manage_users_and_access (test_auth.AuthorisationTests.test_admin_can_manage_users_and_access) ... ok
+test_auditor_cannot_manage_users (test_auth.AuthorisationTests.test_auditor_cannot_manage_users) ... ok
+test_me_returns_server_side_roles_and_models (test_auth.AuthorisationTests.test_me_returns_server_side_roles_and_models) ... ok
+test_roles_are_not_taken_from_the_token (test_auth.AuthorisationTests.test_roles_are_not_taken_from_the_token) ... ok
+test_unknown_role_and_weak_password_are_rejected (test_auth.AuthorisationTests.test_unknown_role_and_weak_password_are_rejected) ... ok
+test_demo_tokens_still_work (test_auth.DemoModeTests.test_demo_tokens_still_work) ... ok
+test_disabled_account_is_rejected (test_auth.LoginTests.test_disabled_account_is_rejected) ... ok
+test_login_is_audited_without_password (test_auth.LoginTests.test_login_is_audited_without_password) ... ok
+test_login_returns_token_and_expiry (test_auth.LoginTests.test_login_returns_token_and_expiry) ... ok
+test_token_of_disabled_account_stops_working (test_auth.LoginTests.test_token_of_disabled_account_stops_working) ... ok
+test_wrong_password_and_unknown_user_are_indistinguishable (test_auth.LoginTests.test_wrong_password_and_unknown_user_are_indistinguishable) ... ok
+test_expired_token_is_rejected (test_auth.TokenTests.test_expired_token_is_rejected) ... ok
+test_missing_or_tampered_token_is_rejected (test_auth.TokenTests.test_missing_or_tampered_token_is_rejected) ... ok
+test_token_signed_with_other_secret_is_rejected (test_auth.TokenTests.test_token_signed_with_other_secret_is_rejected) ... ok
+test_different_seed_changes_each_dataset (test_data_preparation.DataPreparationTests.test_different_seed_changes_each_dataset) ... ok
+test_drift_scenario_has_lower_income_and_higher_debt (test_data_preparation.DataPreparationTests.test_drift_scenario_has_lower_income_and_higher_debt) ... ok
+test_generated_data_passes_independent_validation (test_data_preparation.DataPreparationTests.test_generated_data_passes_independent_validation) ... ok
+test_identical_parameters_are_byte_reproducible (test_data_preparation.DataPreparationTests.test_identical_parameters_are_byte_reproducible) ... ok
+test_invalid_parameters_do_not_create_output (test_data_preparation.DataPreparationTests.test_invalid_parameters_do_not_create_output) ... ok
+test_missing_rate_endpoints_and_half_up_rounding (test_data_preparation.DataPreparationTests.test_missing_rate_endpoints_and_half_up_rounding) ... ok
+test_overwrite_requires_explicit_flag (test_data_preparation.DataPreparationTests.test_overwrite_requires_explicit_flag) ... ok
+test_validator_detects_tampered_range_id_and_hash (test_data_preparation.DataPreparationTests.test_validator_detects_tampered_range_id_and_hash) ... ok
+test_validator_rejects_labels_in_online_stream (test_data_preparation.DataPreparationTests.test_validator_rejects_labels_in_online_stream) ... ok
+test_validator_rejects_wrong_column_count (test_data_preparation.DataPreparationTests.test_validator_rejects_wrong_column_count) ... ok
+test_dictionary_order_does_not_change_inference (test_model_package.ModelPackageTests.test_dictionary_order_does_not_change_inference) ... ok
+test_environment_mismatch_is_rejected_before_deserialization (test_model_package.ModelPackageTests.test_environment_mismatch_is_rejected_before_deserialization) ... ok
+test_existing_version_cannot_be_overwritten (test_model_package.ModelPackageTests.test_existing_version_cannot_be_overwritten) ... ok
+test_explanation_reconstructs_score_and_selects_top_three (test_model_package.ModelPackageTests.test_explanation_reconstructs_score_and_selects_top_three) ... ok
+test_identifier_is_not_a_feature_and_label_is_rejected (test_model_package.ModelPackageTests.test_identifier_is_not_a_feature_and_label_is_rejected) ... ok
+test_invalid_training_config_does_not_create_version (test_model_package.ModelPackageTests.test_invalid_training_config_does_not_create_version) ... ok
+test_manifest_tamper_is_rejected_before_deserialization (test_model_package.ModelPackageTests.test_manifest_tamper_is_rejected_before_deserialization) ... ok
+test_metadata_uses_verified_bytes_when_file_changes_after_read (test_model_package.ModelPackageTests.test_metadata_uses_verified_bytes_when_file_changes_after_read) ... ok
+test_missing_fields_are_preserved_and_imputed (test_model_package.ModelPackageTests.test_missing_fields_are_preserved_and_imputed) ... ok
+test_missing_package_file_is_rejected_before_deserialization (test_model_package.ModelPackageTests.test_missing_package_file_is_rejected_before_deserialization) ... ok
+test_model_tamper_is_rejected_before_deserialization (test_model_package.ModelPackageTests.test_model_tamper_is_rejected_before_deserialization) ... ok
+test_nonfinite_invalid_and_overprecise_inputs_are_rejected (test_model_package.ModelPackageTests.test_nonfinite_invalid_and_overprecise_inputs_are_rejected) ... ok
+test_path_traversal_and_untrusted_digest_are_rejected (test_model_package.ModelPackageTests.test_path_traversal_and_untrusted_digest_are_rejected) ... ok
+test_pipeline_fits_preprocessing_on_training_only (test_model_package.ModelPackageTests.test_pipeline_fits_preprocessing_on_training_only) ... ok
+test_reference_bins_include_every_sample (test_model_package.ModelPackageTests.test_reference_bins_include_every_sample) ... ok
+test_reload_and_old_version_after_loading_new_version (test_model_package.ModelPackageTests.test_reload_and_old_version_after_loading_new_version) ... ok
+test_same_training_recipe_reproduces_predictions (test_model_package.ModelPackageTests.test_same_training_recipe_reproduces_predictions) ... ok
+test_unregistered_version_has_no_fallback (test_model_package.ModelPackageTests.test_unregistered_version_has_no_fallback) ... ok
+test_invalid_policy_threshold_feature_and_sample_count_are_rejected (test_monitoring_worker.MonitoringApiTests.test_invalid_policy_threshold_feature_and_sample_count_are_rejected) ... ok
+test_metrics_expose_known_unconsumed_backlog_before_revision_changes (test_monitoring_worker.MonitoringApiTests.test_metrics_expose_known_unconsumed_backlog_before_revision_changes) ... ok
+test_permissions_and_pagination_are_enforced (test_monitoring_worker.MonitoringApiTests.test_permissions_and_pagination_are_enforced) ... ok
+test_read_metrics_and_dispose_alert_with_idempotent_history (test_monitoring_worker.MonitoringApiTests.test_read_metrics_and_dispose_alert_with_idempotent_history) ... ok
+test_rule_creation_is_versioned_idempotent_and_cannot_backdate (test_monitoring_worker.MonitoringApiTests.test_rule_creation_is_versioned_idempotent_and_cannot_backdate) ... ok
+test_stale_metrics_are_explicit_while_late_revision_is_pending (test_monitoring_worker.MonitoringApiTests.test_stale_metrics_are_explicit_while_late_revision_is_pending) ... ok
+test_additive_migration_preserves_a3_event_data (test_monitoring_worker.MonitoringWorkerTests.test_additive_migration_preserves_a3_event_data) ... ok
+test_consumer_mark_window_and_done_roll_back_together (test_monitoring_worker.MonitoringWorkerTests.test_consumer_mark_window_and_done_roll_back_together) ... ok
+test_consumption_is_durable_before_window_closes (test_monitoring_worker.MonitoringWorkerTests.test_consumption_is_durable_before_window_closes) ... ok
+test_expired_lease_is_reclaimed_and_stale_owner_is_fenced (test_monitoring_worker.MonitoringWorkerTests.test_expired_lease_is_reclaimed_and_stale_owner_is_fenced) ... ok
+test_finalization_waits_for_end_plus_ten_second_grace (test_monitoring_worker.MonitoringWorkerTests.test_finalization_waits_for_end_plus_ten_second_grace) ... ok
+test_five_calculation_failures_are_visible_for_manual_inspection (test_monitoring_worker.MonitoringWorkerTests.test_five_calculation_failures_are_visible_for_manual_inspection) ... ok
+test_five_crashed_claims_go_to_dead_letter (test_monitoring_worker.MonitoringWorkerTests.test_five_crashed_claims_go_to_dead_letter) ... ok
+test_heartbeat_exposes_never_started_fresh_and_stale (test_monitoring_worker.MonitoringWorkerTests.test_heartbeat_exposes_never_started_fresh_and_stale) ... ok
+test_late_correction_never_reopens_closed_alert (test_monitoring_worker.MonitoringWorkerTests.test_late_correction_never_reopens_closed_alert) ... ok
+test_late_events_correct_original_window_without_deleting_alert (test_monitoring_worker.MonitoringWorkerTests.test_late_events_correct_original_window_without_deleting_alert) ... ok
+test_manual_retry_recovers_quarantined_window_without_reconsuming (test_monitoring_worker.MonitoringWorkerTests.test_manual_retry_recovers_quarantined_window_without_reconsuming) ... ok
+test_metric_alert_and_computed_revision_roll_back_together (test_monitoring_worker.MonitoringWorkerTests.test_metric_alert_and_computed_revision_roll_back_together) ... ok
+test_modified_input_evidence_is_not_consumed (test_monitoring_worker.MonitoringWorkerTests.test_modified_input_evidence_is_not_consumed) ... ok
+test_parallel_claims_cannot_own_the_same_live_lease (test_monitoring_worker.MonitoringWorkerTests.test_parallel_claims_cannot_own_the_same_live_lease) ... ok
+test_poison_retries_are_bounded_and_do_not_block_next_event (test_monitoring_worker.MonitoringWorkerTests.test_poison_retries_are_bounded_and_do_not_block_next_event) ... ok
+test_prediction_worker_does_not_reclaim_other_task_types (test_monitoring_worker.MonitoringWorkerTests.test_prediction_worker_does_not_reclaim_other_task_types) ... ok
+test_psi_requires_200_successful_samples (test_monitoring_worker.MonitoringWorkerTests.test_psi_requires_200_successful_samples) ... ok
+test_reference_failure_leaves_dirty_window_and_recovers (test_monitoring_worker.MonitoringWorkerTests.test_reference_failure_leaves_dirty_window_and_recovers) ... ok
+test_replayed_outbox_does_not_duplicate_counts_or_metrics (test_monitoring_worker.MonitoringWorkerTests.test_replayed_outbox_does_not_duplicate_counts_or_metrics) ... ok
+test_restart_finishes_dirty_window_without_unconsumed_events (test_monitoring_worker.MonitoringWorkerTests.test_restart_finishes_dirty_window_without_unconsumed_events) ... ok
+test_revision_guard_rejects_a_stale_calculation (test_monitoring_worker.MonitoringWorkerTests.test_revision_guard_rejects_a_stale_calculation) ... ok
+test_rules_are_frozen_per_window_and_new_rules_affect_future_windows (test_monitoring_worker.MonitoringWorkerTests.test_rules_are_frozen_per_window_and_new_rules_affect_future_windows) ... ok
+test_windows_isolate_model_versions (test_monitoring_worker.MonitoringWorkerTests.test_windows_isolate_model_versions) ... ok
+test_all_missing_psi_stays_finite_with_zero_reference_bin (test_monitoring_worker.StatisticTests.test_all_missing_psi_stays_finite_with_zero_reference_bin) ... ok
+test_empty_statistics_never_fabricate_zero_values (test_monitoring_worker.StatisticTests.test_empty_statistics_never_fabricate_zero_values) ... ok
+test_failure_rate_excludes_load_failures (test_monitoring_worker.StatisticTests.test_failure_rate_excludes_load_failures) ... ok
+test_p95_uses_only_successes_and_linear_interpolation (test_monitoring_worker.StatisticTests.test_p95_uses_only_successes_and_linear_interpolation) ... ok
+test_psi_matches_independent_hand_formula_and_cutpoint_boundary (test_monitoring_worker.StatisticTests.test_psi_matches_independent_hand_formula_and_cutpoint_boundary) ... ok
+test_window_uses_utc_minute_and_exclusive_end (test_monitoring_worker.StatisticTests.test_window_uses_utc_minute_and_exclusive_end) ... ok
+test_evidence_matches_the_scored_input (test_replay_real.RealReplayTests.test_evidence_matches_the_scored_input) ... ok
+test_replay_reproduces_probability_with_same_package (test_replay_real.RealReplayTests.test_replay_reproduces_probability_with_same_package) ... ok
+test_activation_and_audit_roll_back_together (test_scoring_api.ScoringApiTests.test_activation_and_audit_roll_back_together) ... ok
+test_activation_replay_does_not_duplicate_audit (test_scoring_api.ScoringApiTests.test_activation_replay_does_not_duplicate_audit) ... ok
+test_cached_old_version_survives_activation_switch (test_scoring_api.ScoringApiTests.test_cached_old_version_survives_activation_switch) ... ok
+test_database_read_error_returns_no_false_score_success (test_scoring_api.ScoringApiTests.test_database_read_error_returns_no_false_score_success) ... ok
+test_each_write_stage_failure_rolls_back_all_four_records (test_scoring_api.ScoringApiTests.test_each_write_stage_failure_rolls_back_all_four_records) ... ok
+test_environment_mismatch_is_a_nonattempted_failure (test_scoring_api.ScoringApiTests.test_environment_mismatch_is_a_nonattempted_failure) ... ok
+test_failed_idempotent_replay_is_stable_even_after_model_recovery (test_scoring_api.ScoringApiTests.test_failed_idempotent_replay_is_stable_even_after_model_recovery) ... ok
+test_health_openapi_and_sqlite_settings (test_scoring_api.ScoringApiTests.test_health_openapi_and_sqlite_settings) ... ok
+test_idempotency_is_scoped_to_authenticated_principal (test_scoring_api.ScoringApiTests.test_idempotency_is_scoped_to_authenticated_principal) ... ok
+test_inference_failure_is_committed_as_failed_with_null_probability (test_scoring_api.ScoringApiTests.test_inference_failure_is_committed_as_failed_with_null_probability) ... ok
+test_invalid_inputs_never_create_prediction_or_event (test_scoring_api.ScoringApiTests.test_invalid_inputs_never_create_prediction_or_event) ... ok
+test_key_order_does_not_change_request_digest (test_scoring_api.ScoringApiTests.test_key_order_does_not_change_request_digest) ... ok
+test_labels_and_client_role_spoofing_are_rejected (test_scoring_api.ScoringApiTests.test_labels_and_client_role_spoofing_are_rejected) ... ok
+test_missing_invalid_or_oversized_key_is_rejected (test_scoring_api.ScoringApiTests.test_missing_invalid_or_oversized_key_is_rejected) ... ok
+test_missing_or_duplicate_demo_secrets_fail_closed (test_scoring_api.ScoringApiTests.test_missing_or_duplicate_demo_secrets_fail_closed) ... ok
+test_missing_or_wrong_token_is_rejected (test_scoring_api.ScoringApiTests.test_missing_or_wrong_token_is_rejected) ... ok
+test_model_scope_is_checked_on_server (test_scoring_api.ScoringApiTests.test_model_scope_is_checked_on_server) ... ok
+test_null_input_is_preserved_in_snapshot (test_scoring_api.ScoringApiTests.test_null_input_is_preserved_in_snapshot) ... ok
+test_parallel_conflicting_payloads_have_one_winner (test_scoring_api.ScoringApiTests.test_parallel_conflicting_payloads_have_one_winner) ... ok
+test_parallel_same_key_has_one_committed_record (test_scoring_api.ScoringApiTests.test_parallel_same_key_has_one_committed_record) ... ok
+test_real_tampered_package_is_rejected_and_failure_recorded (test_scoring_api.ScoringApiTests.test_real_tampered_package_is_rejected_and_failure_recorded) ... ok
+test_restart_preserves_pending_outbox_and_idempotency (test_scoring_api.ScoringApiTests.test_restart_preserves_pending_outbox_and_idempotency) ... ok
+test_same_key_changed_input_returns_conflict (test_scoring_api.ScoringApiTests.test_same_key_changed_input_returns_conflict) ... ok
+test_same_key_different_version_conflicts (test_scoring_api.ScoringApiTests.test_same_key_different_version_conflicts) ... ok
+test_scorer_cannot_activate_model (test_scoring_api.ScoringApiTests.test_scorer_cannot_activate_model) ... ok
+test_soft_inference_deadline_records_actual_elapsed_time (test_scoring_api.ScoringApiTests.test_soft_inference_deadline_records_actual_elapsed_time) ... ok
+test_success_commits_score_snapshot_audit_and_outbox (test_scoring_api.ScoringApiTests.test_success_commits_score_snapshot_audit_and_outbox) ... ok
+test_ten_retries_return_one_record_and_skip_sequential_inference (test_scoring_api.ScoringApiTests.test_ten_retries_return_one_record_and_skip_sequential_inference) ... ok
+test_auth_pagination_and_no_token_in_url (test_ui.ClientTests.test_auth_pagination_and_no_token_in_url) ... ok
+test_command_retry_reuses_key_and_changed_body_changes_key (test_ui.ClientTests.test_command_retry_reuses_key_and_changed_body_changes_key) ... ok
+test_invalid_json_reports_protocol_error (test_ui.ClientTests.test_invalid_json_reports_protocol_error) ... ok
+test_network_failure_is_sanitized_and_not_retried (test_ui.ClientTests.test_network_failure_is_sanitized_and_not_retried) ... ok
+test_post_requires_key_and_never_follows_redirect (test_ui.ClientTests.test_post_requires_key_and_never_follows_redirect) ... ok
+test_server_errors_do_not_echo_raw_response (test_ui.ClientTests.test_server_errors_do_not_echo_raw_response) ... ok
+test_unsafe_configuration_is_rejected (test_ui.ClientTests.test_unsafe_configuration_is_rejected) ... ok
+test_identity_is_authenticated_and_contains_no_credential (test_ui.IdentityTests.test_identity_is_authenticated_and_contains_no_credential) ... ok
+test_activation_requires_confirmation_and_uses_api (test_ui.WidgetTests.test_activation_requires_confirmation_and_uses_api) ... 2026-11-19 11:39:17.928 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:17.928 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:17.928 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_alert_evidence_and_readonly_role (test_ui.WidgetTests.test_alert_evidence_and_readonly_role) ... 2026-11-19 11:39:19.234 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:19.234 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:19.234 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_close_requires_note_and_persists_via_api (test_ui.WidgetTests.test_close_requires_note_and_persists_via_api) ... 2026-11-19 11:39:19.370 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:19.370 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:19.370 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_closed_corrected_alert_has_no_reopen_button (test_ui.WidgetTests.test_closed_corrected_alert_has_no_reopen_button) ... 2026-11-19 11:39:19.498 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:19.498 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:19.498 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_empty_monitoring_explains_worker_and_window (test_ui.WidgetTests.test_empty_monitoring_explains_worker_and_window) ... 2026-11-19 11:39:19.597 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:19.597 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:19.597 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_entrypoint_login_and_navigation_render (test_ui.WidgetTests.test_entrypoint_login_and_navigation_render) ... 2026-11-19 11:39:20.394 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_login_failure_does_not_keep_token (test_ui.WidgetTests.test_login_failure_does_not_keep_token) ... 2026-11-19 11:39:20.592 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_model_scorer_has_no_activation_button (test_ui.WidgetTests.test_model_scorer_has_no_activation_button) ... 2026-11-19 11:39:20.706 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:20.706 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:20.706 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_null_metric_is_not_displayed_as_zero_and_stale_is_warned (test_ui.WidgetTests.test_null_metric_is_not_displayed_as_zero_and_stale_is_warned) ... 2026-11-19 11:39:20.809 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:20.809 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:20.809 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_worker_staleness_is_visible_to_admin (test_ui.WidgetTests.test_worker_staleness_is_visible_to_admin) ... 2026-11-19 11:39:20.939 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:20.939 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:20.939 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_export_prepares_download_with_digest (test_ui_audit_replay.AuditPageTests.test_export_prepares_download_with_digest) ... 2026-11-19 11:39:21.094 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:21.094 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:21.094 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_non_auditor_sees_guidance_and_no_request (test_ui_audit_replay.AuditPageTests.test_non_auditor_sees_guidance_and_no_request) ... 2026-11-19 11:39:21.332 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:21.332 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:21.332 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_records_and_evidence_are_rendered (test_ui_audit_replay.AuditPageTests.test_records_and_evidence_are_rendered) ... 2026-11-19 11:39:21.438 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:21.439 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:21.439 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_withheld_raw_input_is_explained (test_ui_audit_replay.AuditPageTests.test_withheld_raw_input_is_explained) ... 2026-11-19 11:39:21.552 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:21.552 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:21.552 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_create_sends_idempotent_post (test_ui_audit_replay.ReplayPageTests.test_create_sends_idempotent_post) ... 2026-11-19 11:39:21.665 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:21.665 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:21.665 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_failed_task_explains_reason (test_ui_audit_replay.ReplayPageTests.test_failed_task_explains_reason) ... 2026-11-19 11:39:21.798 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:21.799 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:21.799 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_non_auditor_sees_guidance (test_ui_audit_replay.ReplayPageTests.test_non_auditor_sees_guidance) ... 2026-11-19 11:39:21.905 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:21.905 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:21.905 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_passed_task_shows_comparison (test_ui_audit_replay.ReplayPageTests.test_passed_task_shows_comparison) ... 2026-11-19 11:39:22.000 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:22.000 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-19 11:39:22.000 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+
+----------------------------------------------------------------------
+Ran 158 tests in 31.959s
+
+OK

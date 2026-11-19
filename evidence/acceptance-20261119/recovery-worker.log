@@ -1,0 +1,3 @@
+{"replay_recovered": 1}
+{"consumed": 100, "duplicates": 0, "event_errors": 0, "lease_lost": 0, "windows_computed": 0, "window_errors": 0, "stale_calculations": 0}
+{"replay": {"claimed": 1, "passed": 1, "mismatch": 0, "failed": 0, "skipped": 0}}

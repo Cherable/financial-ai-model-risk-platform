@@ -23,7 +23,7 @@ python -m scripts.verify_model --version credit-logreg-v1
 python -m unittest discover -s tests -v
 ```
 
-`acceptance_live`、`acceptance_load` 和 `acceptance_recovery` 用于隔离演示库的实测，使用 18100 端口及测试账号。负载测试包含 5 并发 500 次基准和三轮 20 并发各 100 次测试，保留每次请求样本。恢复实验只终止隔离测试进程。
+`acceptance_live`、`acceptance_load`、`acceptance_asr` 和 `acceptance_recovery` 用于隔离演示库的实测，使用 18100 端口及测试账号。负载测试包含 5 并发 500 次基准和三轮 20 并发各 100 次测试，保留每次请求样本。恢复实验只终止隔离测试进程。
 
 ## 架构与协作
 
@@ -35,3 +35,10 @@ python -m unittest discover -s tests -v
 - SQLite 单写者和单 Worker 是当前部署约束，未覆盖跨机高可用或生产信贷。
 
 完整设计见 `docs/`，本次整合记录见 `docs/最终整合记录-20261119.md`。
+
+## 最终课程文档
+
+- [课程实验报告](report/金融AI模型风险监测与审计平台-实验报告.docx)
+- [软件需求说明书 V1.5](docs/金融AI模型风险监测与审计平台软件需求说明书.docx)
+
+最终 Word 沿用课程模板，包含实际页面截图和 20261119 的验收结果；当前需求正文同步保存于 docs/软件需求说明书.md。report/build_report.py 与 docs/build_requirements_docx.py 为早期版本生成器，现有最终 Word 为本版依据。

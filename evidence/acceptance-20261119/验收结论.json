@@ -1,0 +1,67 @@
+{
+  "date": "2026-11-19",
+  "core_commit": "ab72dd864d072c269bdc2e74104a145b23058ced",
+  "remote_base": "26d1e4b",
+  "branch": "integration/final-20261119",
+  "environment": "Windows AMD64 / CPython 3.12.14 / loopback HTTP / SQLite WAL / single Worker",
+  "automated_tests": {
+    "run": 158,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "load": {
+    "requests": 800,
+    "successes": 800,
+    "failures": 0,
+    "baseline_p95_ms": 70.41560008656234,
+    "stress_aggregate_p95_ms": 249.5521999662742,
+    "rounds_p95_ms": [
+      233.74429997056723,
+      258.5123999742791,
+      248.6409000121057
+    ],
+    "passed": true
+  },
+  "monitoring": {
+    "window_seconds": 60,
+    "grace_seconds": 10,
+    "lag_seconds": 10.341784,
+    "pending_events": 0,
+    "passed": true
+  },
+  "stopped_worker": {
+    "requests": 100,
+    "done": 100,
+    "unique_consumed": 100,
+    "passed": true
+  },
+  "historical_replay": {
+    "versions": 2,
+    "tasks": 20,
+    "passed_tasks": 20,
+    "absolute_error": 0,
+    "passed": true
+  },
+  "interrupted_replay": {
+    "passed": true,
+    "recovery_audits": 1
+  },
+  "browser": {
+    "pages": 5,
+    "screenshots": 6,
+    "role_isolation_passed": true,
+    "passed": true
+  },
+  "documents": {
+    "pages": [
+      23,
+      34
+    ],
+    "template_styles_preserved": true,
+    "toc_fields_verified": 86,
+    "passed": true
+  },
+  "scope": "合成信贷数据、固定模型、单机原型；跨机高可用、批量导出和生产信贷不属于本次范围。",
+  "passed": true
+}

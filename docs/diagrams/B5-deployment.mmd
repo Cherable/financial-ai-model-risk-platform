@@ -4,7 +4,7 @@ flowchart TB
   subgraph HOST["演示主机　Windows 11 · CPython 3.12.14 · AMD64 · 全部绑定回环地址"]
     P3["<b>页面进程</b><br/>streamlit run streamlit_app.py<br/>127.0.0.1:8501"]
     P1["<b>API 进程</b><br/>uvicorn app.main:create_app --factory<br/>127.0.0.1:8000"]
-    P2["<b>监测 Worker 进程</b><br/>python -m app.worker<br/>轮询 5 秒 · 单轮至多 100 事件 / 20 窗口"]
+    P2["<b>监测与复现 Worker 进程</b><br/>python -m app.worker<br/>空闲轮询 2 秒，满批连续 · 单轮至多 100 事件 / 20 窗口"]
     subgraph FILE["共享文件系统"]
       DB[("运行数据库<br/>data/runtime/platform.db<br/>SQLite · WAL · 外键启用")]
       ART["模型包目录 artifacts/<br/>trusted_registry.json<br/>credit-logreg-v1、v2"]

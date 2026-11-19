@@ -1,0 +1,2 @@
+{"worker_stopped_requests": 100, "pending_before_restart": 100, "done_after_restart": 100, "processed_rows": 100, "unique_processed_events": 100, "passed": true}
+20 original-version replays passed

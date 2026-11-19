@@ -1,0 +1,10 @@
+{
+  "executed_at": "2026-11-19T03:43:11.506020+00:00",
+  "source_commit": "ab72dd864d072c269bdc2e74104a145b23058ced",
+  "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "scope": "real loopback HTTP; synthetic data; single Windows host",
+  "prediction_id": "a383e591-3d0e-4867-8625-9ba687046784",
+  "replay_id": "ae73ae72-8a00-4b1f-a235-cd05600318fd",
+  "passed": true
+}
+P95(ms): 216.78500005509704 RPS: 101.78968662843442

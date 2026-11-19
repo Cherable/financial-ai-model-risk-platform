@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-19",
+  "base_url": "http://127.0.0.1:18519",
+  "roles": [
+    "admin",
+    "risk_manager"
+  ],
+  "checks": [
+    "model registry contains two validated versions",
+    "audit table and evidence visible",
+    "browser created replay f4377406-9132-4aed-be85-f1ea8c1b736c and refreshed to passed with absolute error 0",
+    "monitoring has no backlog or failed windows and PSI 7/7 available",
+    "risk acknowledged and closed alert 1ffaffb1-5dc7-4485-9e4b-ba7496fa7dd1",
+    "risk audit page denied"
+  ],
+  "passed": true
+}

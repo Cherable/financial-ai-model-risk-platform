@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-19",
+  "documents": [
+    {
+      "file": "金融AI模型风险监测与审计平台课程实验报告.docx",
+      "pages": 23,
+      "sha256": "5c9154dceab904167c0d2108cbc5a3df3c709507cbedde090122c702e54d49f1",
+      "styles_preserved": true,
+      "section_geometry_preserved": true,
+      "tables_preserved": true,
+      "toc_links_verified": 0,
+      "changed_pages_since_previous_visual_review": [
+        15,
+        16
+      ],
+      "render_folder": "C:\\Users\\a1632\\Desktop\\软件架构与设计\\integrated-final-20261119\\data\\runtime\\final-validation\\report-final2",
+      "passed": true
+    },
+    {
+      "file": "金融AI模型风险监测与审计平台软件需求说明书.docx",
+      "pages": 34,
+      "sha256": "92f9ff2aadef38c9cdb0b573117c389ee4c2bb0bf635bb1f7e9bd985725727dd",
+      "styles_preserved": true,
+      "section_geometry_preserved": true,
+      "tables_preserved": true,
+      "toc_links_verified": 86,
+      "changed_pages_since_previous_visual_review": [
+        4
+      ],
+      "render_folder": "C:\\Users\\a1632\\Desktop\\软件架构与设计\\integrated-final-20261119\\data\\runtime\\final-validation\\spec-final2",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "visually_reviewed_pages": 57,
+  "review": "逐页检查全部页面；最后修改后按像素比较，报告仅第 15、16 页、需求仅第 4 页变化，已再次检查。"
+}
