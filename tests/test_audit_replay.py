@@ -7,6 +7,7 @@ import hashlib
 import json
 import os
 import tempfile
+import time
 import unittest
 from datetime import datetime, timezone
 from uuid import uuid4
@@ -201,6 +202,16 @@ class ReplayTests(AuditReplayBase):
 
     def test_concurrent_creation_returns_one_conflict(self):
         from concurrent.futures import ThreadPoolExecutor
+        service = self.app.state.replay
+        original_clock = service.clock
+
+        def slow_clock():
+            # 放大“检查活动任务—插入”窗口，确保两个请求真正交错，避免测试因调度错开而空过。
+            time.sleep(0.3)
+            return original_clock()
+
+        service.clock = slow_clock
+        self.addCleanup(setattr, service, "clock", original_clock)
         headers = self.headers("auditor")
         with ThreadPoolExecutor(max_workers=2) as pool:
             responses = list(pool.map(lambda key: self.create(headers=headers, key=key), ["parallel-1", "parallel-2"]))
