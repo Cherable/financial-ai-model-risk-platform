@@ -8,6 +8,7 @@ from decimal import Decimal
 from functools import wraps
 from pathlib import Path
 from uuid import uuid4
+from threading import RLock
 
 from sqlalchemy import (JSON, Boolean, CheckConstraint, Column, Float, ForeignKey, Integer,
                         MetaData, String, Table, Text, UniqueConstraint, create_engine, event, func, select)
@@ -80,6 +81,7 @@ class SqlitePredictionStore:
             raise ValueError("A3 adapter requires a local file-backed sqlite database")
         Path(url.database).resolve().parent.mkdir(parents=True, exist_ok=True)
         self.engine = create_engine(url, connect_args={"check_same_thread": False, "timeout": 5})
+        self._write_lock = RLock()
         self.after_write = after_write or (lambda stage: None)
 
         @event.listens_for(self.engine, "connect")
@@ -92,7 +94,7 @@ class SqlitePredictionStore:
 
     @contextmanager
     def _write(self):
-        with self.engine.connect() as conn:
+        with self._write_lock, self.engine.connect() as conn:
             conn.exec_driver_sql("BEGIN IMMEDIATE")
             try:
                 yield conn

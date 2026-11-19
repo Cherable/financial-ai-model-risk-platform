@@ -38,7 +38,7 @@ class ReplayService:
             engine, artifact_root, loader, scorer, clock)
 
     # ---------- 创建与查询 ----------
-    def create(self, actor, prediction_id: str) -> dict:
+    def create(self, actor, prediction_id: str, *, key: str | None = None) -> dict:
         if not (REPLAY_ROLES & set(actor.roles)):
             raise DomainError(403, "FORBIDDEN", "Auditor or administrator role required.")
         with self.engine.begin() as conn:
@@ -51,6 +51,18 @@ class ReplayService:
                                     .where(versions.c.model_version_id == prediction["model_version_id"])).scalar()
             if model_id not in actor.model_ids:
                 raise DomainError(403, "FORBIDDEN", "Model is outside the authorized range.")
+            # Audit entries and task creation share the same SQLite transaction.
+            if key is not None:
+                receipt = conn.execute(select(audit_logs).where(
+                    audit_logs.c.principal_id == actor.principal_id,
+                    audit_logs.c.action == "replay.requested",
+                    audit_logs.c.details["idempotency_key"].as_string() == key)).mappings().first()
+                if receipt is not None:
+                    if receipt["details"].get("prediction_id") != prediction_id:
+                        raise DomainError(409, "IDEMPOTENCY_CONFLICT", "Key was used for another prediction.")
+                    row = conn.execute(select(replay_runs).where(
+                        replay_runs.c.replay_id == receipt["resource_id"])).mappings().one()
+                    return dict(row)
             active = conn.execute(select(replay_runs.c.replay_id)
                                   .where(replay_runs.c.prediction_id == prediction_id,
                                          replay_runs.c.status.in_(("pending", "running")))).first()
@@ -65,7 +77,7 @@ class ReplayService:
             conn.execute(insert(audit_logs).values(
                 audit_id=str(uuid4()), principal_id=actor.principal_id, action="replay.requested",
                 resource_id=replay_id, created_at=stamp(self.clock()),
-                details={"prediction_id": prediction_id}))
+                details={"prediction_id": prediction_id, "idempotency_key": key}))
         return self.get(actor, replay_id)
 
     def get(self, actor, replay_id: str) -> dict:
@@ -81,6 +93,20 @@ class ReplayService:
         return dict(row)
 
     # ---------- 执行 ----------
+    def recover_interrupted(self) -> int:
+        """Only call on startup of the deployment's sole worker, after old worker exits."""
+        with self.engine.begin() as conn:
+            conn.exec_driver_sql("BEGIN IMMEDIATE")
+            rows = conn.execute(select(replay_runs).where(replay_runs.c.status == "running")).mappings().all()
+            for row in rows:
+                conn.execute(update(replay_runs).where(replay_runs.c.replay_id == row["replay_id"])
+                             .values(status="pending", environment_check="pending"))
+                conn.execute(insert(audit_logs).values(audit_id=str(uuid4()),
+                    principal_id=row["requested_by"], action="replay.recovered",
+                    resource_id=row["replay_id"], created_at=stamp(self.clock()),
+                    details={"reason": "single worker restarted after interruption"}))
+            return len(rows)
+
     def process_pending(self, limit: int = 5) -> dict:
         result = {"claimed": 0, "passed": 0, "mismatch": 0, "failed": 0, "skipped": 0}
         for _ in range(limit):

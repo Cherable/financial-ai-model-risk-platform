@@ -17,7 +17,7 @@ def attach_routes(app, principal_dep, idempotency_key, service: ReplayService):
     @app.post("/api/v1/replay-runs", status_code=201)
     @storage_errors
     def create(body: ReplayRequest, actor=Depends(principal_dep), key=Depends(idempotency_key)):
-        return service.create(actor, str(body.prediction_id))
+        return service.create(actor, str(body.prediction_id), key=key)
 
     @app.get("/api/v1/replay-runs/{replay_id}")
     @storage_errors

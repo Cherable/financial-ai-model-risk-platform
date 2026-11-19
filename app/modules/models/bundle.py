@@ -5,7 +5,9 @@ It does not establish the authenticity of arbitrary downloaded pickle files.
 """
 
 from dataclasses import dataclass
+from functools import lru_cache
 import hashlib
+from io import BytesIO
 from importlib.metadata import version as package_version
 import json
 from pathlib import Path
@@ -25,6 +27,10 @@ PACKAGES = ("cloudpickle", "joblib", "narwhals", "numpy", "scikit-learn", "scipy
 PACKAGE_FILES = {"pipeline.joblib", "feature_schema.json", "training_config.json", "environment.json",
                  "requirements.lock.txt", "reference_distribution.json", "explanation_config.json",
                  "model_parameters.json", "evaluation.json", "smoke_cases.json"}
+
+# Installed package versions are fixed for this process; dependency changes require restart.
+# File inventory, trusted digests and bundle environment are still checked on every load.
+package_version = lru_cache(maxsize=32)(package_version)
 
 
 def sha256(path: Path) -> str:
@@ -58,6 +64,13 @@ class ModelBundle:
     smoke_cases: list
 
 
+@lru_cache(maxsize=8)
+def _deserialize_verified_pipeline(payload: bytes):
+    with warnings.catch_warnings():
+        warnings.simplefilter("error", InconsistentVersionWarning)
+        return joblib.load(BytesIO(payload))
+
+
 def load_bundle(version: str, expected_manifest_sha256: str,
                 root: Path = DEFAULT_ARTIFACT_ROOT) -> ModelBundle:
     """The caller must supply an approved manifest digest, e.g. from B's registry."""
@@ -67,18 +80,25 @@ def load_bundle(version: str, expected_manifest_sha256: str,
         raise ValueError("model manifest is missing or unsafe")
     if not re.fullmatch(r"[a-f0-9]{64}", expected_manifest_sha256 or ""):
         raise ValueError("an independently trusted manifest SHA-256 is required")
-    if sha256(manifest_path) != expected_manifest_sha256:
+    manifest_bytes = manifest_path.read_bytes()
+    if hashlib.sha256(manifest_bytes).hexdigest() != expected_manifest_sha256:
         raise ValueError("manifest SHA-256 mismatch")
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest = json.loads(manifest_bytes)
     if manifest.get("model_version") != version or manifest.get("bundle_format") != "1.0":
         raise ValueError("bundle identity or format mismatch")
     if set(manifest.get("files", {})) != PACKAGE_FILES:
         raise ValueError("unexpected package file inventory")
+    verified = {}
     for name, digest in manifest["files"].items():
         path = folder / name
-        if path.is_symlink() or not path.is_file() or sha256(path) != digest:
+        if path.is_symlink() or not path.is_file():
             raise ValueError(f"package integrity check failed: {name}")
-    read = lambda name: json.loads((folder / name).read_text(encoding="utf-8"))
+        payload = path.read_bytes()
+        if hashlib.sha256(payload).hexdigest() != digest:
+            raise ValueError(f"package integrity check failed: {name}")
+        verified[name] = payload
+    # Parse and deserialize exactly the bytes just verified, without reopening files.
+    read = lambda name: json.loads(verified[name])
     if read("environment.json") != environment():
         raise ValueError("environment mismatch; restore the pinned environment before loading")
     if read("feature_schema.json") != feature_schema():
@@ -87,9 +107,7 @@ def load_bundle(version: str, expected_manifest_sha256: str,
     if config.get("model_version") != version or config.get("feature_order") != list(FEATURES):
         raise ValueError("training configuration mismatch")
     # Loading is last: no pickle execution before inventory, digest and environment checks.
-    with warnings.catch_warnings():
-        warnings.simplefilter("error", InconsistentVersionWarning)
-        pipeline = joblib.load(folder / "pipeline.joblib")
+    pipeline = _deserialize_verified_pipeline(verified["pipeline.joblib"])
     if not isinstance(pipeline, Pipeline) or list(pipeline.named_steps) != ["imputer", "scaler", "classifier"]:
         raise ValueError("unexpected pipeline structure")
     if pipeline.n_features_in_ != len(FEATURES) or not np.array_equal(pipeline.classes_, [0, 1]):

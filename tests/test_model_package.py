@@ -125,6 +125,24 @@ class ModelPackageTests(unittest.TestCase):
                 load_bundle("test-v1", self.result["manifest_sha256"], root)
             loader.assert_not_called()
 
+    def test_metadata_uses_verified_bytes_when_file_changes_after_read(self):
+        root = self.copy_bundle("metadata-read-race")
+        target = root / "test-v1" / "reference_distribution.json"
+        original_read = Path.read_bytes
+        expected = json.loads(original_read(target))
+
+        def read_then_change(path):
+            payload = original_read(path)
+            if path == target:
+                path.write_text('{"changed_after_read": true}', encoding="utf-8")
+            return payload
+
+        with patch.object(Path, "read_bytes", read_then_change):
+            bundle = load_bundle("test-v1", self.result["manifest_sha256"], root)
+        self.assertEqual(expected, bundle.reference_distribution)
+        with self.assertRaisesRegex(ValueError, "integrity"):
+            load_bundle("test-v1", self.result["manifest_sha256"], root)
+
     def test_missing_package_file_is_rejected_before_deserialization(self):
         root = self.copy_bundle("missing")
         (root / "test-v1" / "pipeline.joblib").rename(root / "test-v1" / "not-model.bin")

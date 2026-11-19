@@ -188,6 +188,42 @@ class ExportTests(AuditReplayBase):
 
 
 class ReplayTests(AuditReplayBase):
+    def test_concurrent_same_key_returns_one_task(self):
+        from concurrent.futures import ThreadPoolExecutor
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            responses = list(pool.map(lambda _: self.create(key="same-concurrent-key"), range(2)))
+        self.assertEqual([201, 201], [r.status_code for r in responses])
+        self.assertEqual(responses[0].json()["replay_id"], responses[1].json()["replay_id"])
+
+    def test_same_key_returns_task_after_completion(self):
+        first = self.create().json()
+        service = self.use_stub_runner(lambda bundle, raw: {"risk_probability": 0.42, "decision": 0})
+        service.process_pending()
+        repeated = self.create()
+        self.assertEqual(201, repeated.status_code)
+        self.assertEqual(first["replay_id"], repeated.json()["replay_id"])
+        self.assertEqual("passed", repeated.json()["status"])
+
+    def test_same_key_other_prediction_conflicts(self):
+        self.create()
+        another = self.make_prediction(str(uuid4()), VERSION_ID, probability=0.4)
+        response = self.client.post("/api/v1/replay-runs", json={"prediction_id": another},
+            headers={**self.headers("auditor"), "Idempotency-Key": "key-1"})
+        self.assertEqual(409, response.status_code)
+        self.assertEqual("IDEMPOTENCY_CONFLICT", response.json()["error"]["code"])
+
+    def test_restart_recovers_claimed_task(self):
+        task = self.create().json()
+        service = self.use_stub_runner(lambda bundle, raw: {"risk_probability": 0.42, "decision": 0})
+        self.assertEqual(task["replay_id"], service._claim()["replay_id"])
+        self.assertEqual(1, service.recover_interrupted())
+        self.assertEqual(0, service.recover_interrupted())
+        self.assertEqual(1, service.process_pending()["passed"])
+        with self.engine.connect() as conn:
+            from app.storage.sqlite_store import audit_logs
+            rows = conn.execute(select(audit_logs).where(audit_logs.c.action == "replay.recovered")).all()
+        self.assertEqual(1, len(rows))
+
     def create(self, headers=None, key="key-1"):
         return self.client.post("/api/v1/replay-runs", json={"prediction_id": self.prediction_id},
                                 headers={**(headers or self.headers("auditor")), "Idempotency-Key": key})

@@ -41,6 +41,8 @@ class MonitoringWorker:
             except Exception as exc:
                 self.store.fail_event(claimed, self.clock(), "INVALID_EVENT" if isinstance(exc, (InvalidEvent, ValueError, KeyError, TypeError)) else "CONSUME_FAILED")
                 result["event_errors"] += 1
+            # Yield between event transactions so the HTTP writer can acquire SQLite.
+            time.sleep(0.02)
         for pending in self.store.ready_windows(self.clock(), max_windows):
             window, version, records = self.store.window_data(pending["window_id"])
             try:
@@ -67,7 +69,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--once", action="store_true")
     parser.add_argument("--max-events", type=int, default=100)
-    parser.add_argument("--poll-seconds", type=float, default=5)
+    parser.add_argument("--poll-seconds", type=float, default=2)
     retries = parser.add_mutually_exclusive_group()
     retries.add_argument("--retry-event", type=UUID)
     retries.add_argument("--retry-window", type=UUID)
@@ -91,9 +93,11 @@ def main():
             return
         worker = MonitoringWorker(store, settings.artifact_root)
         replay = ReplayService(base.engine, settings.artifact_root)
+        print(json.dumps({"replay_recovered": replay.recover_interrupted()}), flush=True)
         while True:
             try:
-                print(json.dumps(worker.run_once(args.max_events)), flush=True)
+                monitoring_result = worker.run_once(args.max_events)
+                print(json.dumps(monitoring_result), flush=True)
                 replay_result = replay.process_pending()
                 if replay_result["claimed"]:
                     print(json.dumps({"replay": replay_result}), flush=True)
@@ -101,9 +105,14 @@ def main():
                 print(json.dumps({"error": "STORAGE_UNAVAILABLE"}), flush=True)
                 if args.once:
                     raise SystemExit(1)
+                time.sleep(args.poll_seconds)
+                continue
             if args.once:
                 break
-            time.sleep(args.poll_seconds)
+            # A full batch can leave a backlog; drain it without another idle interval.
+            # Each event still yields the writer lock between its transactions.
+            if sum(monitoring_result[k] for k in ("consumed", "duplicates", "event_errors", "lease_lost")) < args.max_events:
+                time.sleep(args.poll_seconds)
     except DomainError as exc:
         print(json.dumps({"error": exc.code, "message": exc.message}), flush=True)
         raise SystemExit(1)
