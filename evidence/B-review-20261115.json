@@ -1,5 +1,12 @@
 {
   "reviewed_commit": "b3480700f8ee2d0f5898312139dfd30dc62f5381",
+  "fix_commit": "9bf42c40dfc02fe8202e1f57530aad67cb6a2c52",
+  "tested_commit": "51841d2b10087cdda33cd668d0aaf37773a43187",
+  "command": ".venv/Scripts/python.exe -m unittest discover -s tests",
+  "environment": {
+    "python": "CPython 3.12.14",
+    "platform": "Windows 11 AMD64"
+  },
   "tests_run": 153,
   "failures": 0,
   "errors": 0,
