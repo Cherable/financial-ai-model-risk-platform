@@ -1,0 +1,313 @@
+{
+  "passed": true,
+  "transport": "real HTTP on 127.0.0.1",
+  "synthetic_only": true,
+  "credentials_exported": false,
+  "database": "temporary SQLite; removed after verification",
+  "checks": {
+    "normal_http_status": 201,
+    "replay_same_body": true,
+    "conflict_http_status": 409,
+    "failure_http_status": 503,
+    "unauthenticated_http_status": 401,
+    "failed_replay_same_body_after_package_restored": true
+  },
+  "database_counts": {
+    "input_snapshots": 3,
+    "predictions": 3,
+    "audit_logs": 5,
+    "outbox_events": 3
+  },
+  "outbox_statuses": [
+    "pending",
+    "pending",
+    "pending"
+  ],
+  "normal_response": {
+    "prediction_id": "8b2be7d4-7a5d-4175-934a-b48bb9f1f0ba",
+    "event_id": "e02900e4-73c3-413d-8912-dfdaf976c7d9",
+    "snapshot_id": "d4e753ad-5870-48bf-8537-6b45fa2772df",
+    "model_version_id": "ef31e86c-44a0-5925-bb71-26c41da39d32",
+    "model_version": "credit-logreg-v1",
+    "manifest_sha256": "b5fc62c8277974676c53eab3a55945538d90f0c874cdc664bfcdfc2084eefa0a",
+    "request_received_at": "2026-11-04T13:06:49.719764Z",
+    "completed_at": "2026-11-04T13:06:49.751484Z",
+    "status": "success",
+    "risk_probability": 0.3088120976806297,
+    "decision_threshold": 0.5,
+    "decision": "below_threshold",
+    "explanation": {
+      "method": "standardized_linear_log_odds",
+      "intercept": -1.2856499498509533,
+      "log_odds": -0.8056787210950552,
+      "contributions": [
+        {
+          "feature": "age",
+          "original_value": 35,
+          "was_missing": false,
+          "imputed_value": 35.0,
+          "standardized_value": -0.7807073816110527,
+          "coefficient": -0.052552245832557444,
+          "log_odds_contribution": 0.04102792624171628
+        },
+        {
+          "feature": "monthly_income",
+          "original_value": "8000.00",
+          "was_missing": false,
+          "imputed_value": 8000.0,
+          "standardized_value": -0.20992697646891803,
+          "coefficient": -0.40288517481669645,
+          "log_odds_contribution": 0.08457646661342057
+        },
+        {
+          "feature": "debt_income_ratio",
+          "original_value": 0.4,
+          "was_missing": false,
+          "imputed_value": 0.4,
+          "standardized_value": -0.398770440095002,
+          "coefficient": 0.7151285997268901,
+          "log_odds_contribution": -0.2851721464376145
+        },
+        {
+          "feature": "past_due_count",
+          "original_value": 1,
+          "was_missing": false,
+          "imputed_value": 1.0,
+          "standardized_value": 1.2371999103369826,
+          "coefficient": 0.2991575907716462,
+          "log_odds_contribution": 0.37011774447930845
+        },
+        {
+          "feature": "loan_amount",
+          "original_value": "100000.00",
+          "was_missing": false,
+          "imputed_value": 100000.0,
+          "standardized_value": -0.18274246016992707,
+          "coefficient": 0.5637233845891946,
+          "log_odds_contribution": -0.10301619815514737
+        },
+        {
+          "feature": "employment_years",
+          "original_value": 10.0,
+          "was_missing": false,
+          "imputed_value": 10.0,
+          "standardized_value": -0.3957341367403007,
+          "coefficient": -0.9411304242843865,
+          "log_odds_contribution": 0.37243743601421464
+        }
+      ],
+      "top_factors": [
+        {
+          "feature": "employment_years",
+          "original_value": 10.0,
+          "was_missing": false,
+          "imputed_value": 10.0,
+          "standardized_value": -0.3957341367403007,
+          "coefficient": -0.9411304242843865,
+          "log_odds_contribution": 0.37243743601421464
+        },
+        {
+          "feature": "past_due_count",
+          "original_value": 1,
+          "was_missing": false,
+          "imputed_value": 1.0,
+          "standardized_value": 1.2371999103369826,
+          "coefficient": 0.2991575907716462,
+          "log_odds_contribution": 0.37011774447930845
+        },
+        {
+          "feature": "debt_income_ratio",
+          "original_value": 0.4,
+          "was_missing": false,
+          "imputed_value": 0.4,
+          "standardized_value": -0.398770440095002,
+          "coefficient": 0.7151285997268901,
+          "log_odds_contribution": -0.2851721464376145
+        }
+      ],
+      "caveat": "Additive log-odds contributions, not causal effects or probability changes."
+    },
+    "error_code": null,
+    "inference_ms": 4.117100033909082,
+    "inference_attempted": true
+  },
+  "failed_response": {
+    "prediction_id": "698fbad4-f21d-41bb-8150-36cc5c9a86f7",
+    "event_id": "1897095b-e972-4a72-845d-c007818f3fd1",
+    "snapshot_id": "a26f9b54-364a-4417-99d7-9a313a969924",
+    "model_version_id": "ef31e86c-44a0-5925-bb71-26c41da39d32",
+    "model_version": "credit-logreg-v1",
+    "manifest_sha256": "b5fc62c8277974676c53eab3a55945538d90f0c874cdc664bfcdfc2084eefa0a",
+    "request_received_at": "2026-11-04T13:06:49.759815Z",
+    "completed_at": "2026-11-04T13:06:49.761817Z",
+    "status": "failed",
+    "risk_probability": null,
+    "decision_threshold": null,
+    "decision": null,
+    "explanation": null,
+    "error_code": "MODEL_PACKAGE_UNAVAILABLE",
+    "inference_ms": null,
+    "inference_attempted": false
+  },
+  "v2_response": {
+    "prediction_id": "e025d7b4-e696-44b5-8a08-3a6817dee560",
+    "event_id": "239fc2d0-f214-455a-9b5d-0b0c83b66b33",
+    "snapshot_id": "800ae168-bb65-4e97-aeba-65256e632ab6",
+    "model_version_id": "40d13c7c-d545-5ff1-a6d3-8524efe5414b",
+    "model_version": "credit-logreg-v2",
+    "manifest_sha256": "054de9de21b6e22399653eb7199f599f4c7e5106f3a3c100eb274153c7328220",
+    "request_received_at": "2026-11-04T13:06:49.775816Z",
+    "completed_at": "2026-11-04T13:06:49.789078Z",
+    "status": "success",
+    "risk_probability": 0.30898322913200094,
+    "decision_threshold": 0.5,
+    "decision": "below_threshold",
+    "explanation": {
+      "method": "standardized_linear_log_odds",
+      "intercept": -1.28410341912042,
+      "log_odds": -0.804877093133301,
+      "contributions": [
+        {
+          "feature": "age",
+          "original_value": 35,
+          "was_missing": false,
+          "imputed_value": 35.0,
+          "standardized_value": -0.7807073816110527,
+          "coefficient": -0.053723655993836196,
+          "log_odds_contribution": 0.04194245480152079
+        },
+        {
+          "feature": "monthly_income",
+          "original_value": "8000.00",
+          "was_missing": false,
+          "imputed_value": 8000.0,
+          "standardized_value": -0.20992697646891803,
+          "coefficient": -0.3999982796191478,
+          "log_odds_contribution": 0.08397042943321653
+        },
+        {
+          "feature": "debt_income_ratio",
+          "original_value": 0.4,
+          "was_missing": false,
+          "imputed_value": 0.4,
+          "standardized_value": -0.398770440095002,
+          "coefficient": 0.7136826336671303,
+          "log_odds_contribution": -0.2845955379156016
+        },
+        {
+          "feature": "past_due_count",
+          "original_value": 1,
+          "was_missing": false,
+          "imputed_value": 1.0,
+          "standardized_value": 1.2371999103369826,
+          "coefficient": 0.29853183155406987,
+          "log_odds_contribution": 0.3693435552314304
+        },
+        {
+          "feature": "loan_amount",
+          "original_value": "100000.00",
+          "was_missing": false,
+          "imputed_value": 100000.0,
+          "standardized_value": -0.18274246016992707,
+          "coefficient": 0.5608535124669445,
+          "log_odds_contribution": -0.1024917506631543
+        },
+        {
+          "feature": "employment_years",
+          "original_value": 10.0,
+          "was_missing": false,
+          "imputed_value": 10.0,
+          "standardized_value": -0.3957341367403007,
+          "coefficient": -0.9376425752808183,
+          "log_odds_contribution": 0.37105717509970704
+        }
+      ],
+      "top_factors": [
+        {
+          "feature": "employment_years",
+          "original_value": 10.0,
+          "was_missing": false,
+          "imputed_value": 10.0,
+          "standardized_value": -0.3957341367403007,
+          "coefficient": -0.9376425752808183,
+          "log_odds_contribution": 0.37105717509970704
+        },
+        {
+          "feature": "past_due_count",
+          "original_value": 1,
+          "was_missing": false,
+          "imputed_value": 1.0,
+          "standardized_value": 1.2371999103369826,
+          "coefficient": 0.29853183155406987,
+          "log_odds_contribution": 0.3693435552314304
+        },
+        {
+          "feature": "debt_income_ratio",
+          "original_value": 0.4,
+          "was_missing": false,
+          "imputed_value": 0.4,
+          "standardized_value": -0.398770440095002,
+          "coefficient": 0.7136826336671303,
+          "log_odds_contribution": -0.2845955379156016
+        }
+      ],
+      "caveat": "Additive log-odds contributions, not causal effects or probability changes."
+    },
+    "error_code": null,
+    "inference_ms": 1.6769999638199806,
+    "inference_attempted": true
+  },
+  "outbox_events": [
+    {
+      "prediction_id": "8b2be7d4-7a5d-4175-934a-b48bb9f1f0ba",
+      "snapshot_id": "d4e753ad-5870-48bf-8537-6b45fa2772df",
+      "model_version_id": "ef31e86c-44a0-5925-bb71-26c41da39d32",
+      "request_received_at": "2026-11-04T13:06:49.719764Z",
+      "completed_at": "2026-11-04T13:06:49.751484Z",
+      "status": "success",
+      "risk_probability": 0.3088120976806297,
+      "decision_threshold": 0.5,
+      "decision": "below_threshold",
+      "inference_ms": 4.117100033909082,
+      "inference_attempted": true,
+      "error_code": null,
+      "schema_version": "1.1",
+      "event_id": "e02900e4-73c3-413d-8912-dfdaf976c7d9",
+      "event_type": "prediction.completed"
+    },
+    {
+      "prediction_id": "698fbad4-f21d-41bb-8150-36cc5c9a86f7",
+      "snapshot_id": "a26f9b54-364a-4417-99d7-9a313a969924",
+      "model_version_id": "ef31e86c-44a0-5925-bb71-26c41da39d32",
+      "request_received_at": "2026-11-04T13:06:49.759815Z",
+      "completed_at": "2026-11-04T13:06:49.761817Z",
+      "status": "failed",
+      "risk_probability": null,
+      "decision_threshold": null,
+      "decision": null,
+      "inference_ms": null,
+      "inference_attempted": false,
+      "error_code": "MODEL_PACKAGE_UNAVAILABLE",
+      "schema_version": "1.1",
+      "event_id": "1897095b-e972-4a72-845d-c007818f3fd1",
+      "event_type": "prediction.completed"
+    },
+    {
+      "prediction_id": "e025d7b4-e696-44b5-8a08-3a6817dee560",
+      "snapshot_id": "800ae168-bb65-4e97-aeba-65256e632ab6",
+      "model_version_id": "40d13c7c-d545-5ff1-a6d3-8524efe5414b",
+      "request_received_at": "2026-11-04T13:06:49.775816Z",
+      "completed_at": "2026-11-04T13:06:49.789078Z",
+      "status": "success",
+      "risk_probability": 0.30898322913200094,
+      "decision_threshold": 0.5,
+      "decision": "below_threshold",
+      "inference_ms": 1.6769999638199806,
+      "inference_attempted": true,
+      "error_code": null,
+      "schema_version": "1.1",
+      "event_id": "239fc2d0-f214-455a-9b5d-0b0c83b66b33",
+      "event_type": "prediction.completed"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "bundle_format": "1.0",
+  "files": {
+    "environment.json": "b55f0e452d3c8878b32b101f5e1c90dc7b59a5916a0ca24ffe22210874a1803b",
+    "evaluation.json": "ef62687a186e0b6b014418a22c6016987479147fcc8a31a16b2ea0e21475c6e0",
+    "explanation_config.json": "a0b9ea60bb19eafb9338e91db3c0d67f4dcc849cf6def6396db0a57df517563e",
+    "feature_schema.json": "e839f370683155629438170e2b65270fd6384e01acb6ae7ec420bcc6f4c05077",
+    "model_parameters.json": "54e660af8bdf71e9c0a5f50b1e9b224a2c3d7066377e2b716514fd7577ed188d",
+    "pipeline.joblib": "b51302f4e539e37b67ff90d91c42ab50ab3aceb717e20421d6ba1540f3ecf8e5",
+    "reference_distribution.json": "93e6f08eeacf59221a6593a0b067d94c9cfb2b6afe70fc76ef7b36221bc16f98",
+    "requirements.lock.txt": "dbe07ba050213844c44a7e7a2764d9c8ad25748a4d15f3e4ba5515c3d2514b9f",
+    "smoke_cases.json": "75e375700a9085a079368d6b706fe14bafa32bfd158b391ef3f916c6e4d52a83",
+    "training_config.json": "f5a77b7d1a414b91100df331bfe9a2bb23b33f1bccd618e67193d328753ffe32"
+  },
+  "model_version": "credit-logreg-v2",
+  "synthetic_only": true
+}

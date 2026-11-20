@@ -1,0 +1,43 @@
+{
+  "classifier": {
+    "C": 1.0,
+    "max_iter": 1000,
+    "name": "LogisticRegression",
+    "random_state": 20261104,
+    "solver": "lbfgs",
+    "tol": 1e-08
+  },
+  "decision_threshold": 0.5,
+  "feature_order": [
+    "age",
+    "monthly_income",
+    "debt_income_ratio",
+    "past_due_count",
+    "loan_amount",
+    "employment_years"
+  ],
+  "fit_dataset": "train.csv",
+  "implementation_sha256": {
+    "app/modules/models/bundle.py": "3f566531bab7d0e6a17c09f32f5a37ec5535d4217478d6237b4e29934088d4ad",
+    "app/modules/models/schema.py": "00e2b91e424f6762a738529cce301dcfccbc6cdfa39a2e56d3afebcea5ce61d3",
+    "app/modules/scoring/predict.py": "02f27f66849a3aafeaf81fd45e68f08fe20d4106abb8eb9d37170a17a370f08b",
+    "scripts/train_model.py": "a720e09474bcb573c096fc5e6fefa4612d526ed01336a19b8a926443a0402015"
+  },
+  "model_version": "credit-logreg-v1",
+  "preprocessing": {
+    "imputer": "median",
+    "keep_empty_features": true,
+    "scaler": "StandardScaler"
+  },
+  "reference_usage": "fixed bins only; not used in fitting",
+  "seed": 20261104,
+  "source_sha256": {
+    "manifest.json": "6369ce3b56edf9853ee7d8f0d34461088e198b42a8ed4fe30dbdb86905a40d22",
+    "reference.csv": "366dedccdd29dec909f5d368c98ba3b026fcc1909a21fe248dd4bd9ddd765d42",
+    "test.csv": "14159ed1a605313a949ee6a33cdc7c5f2fd6f1d5341442587e45ab47ea42846a",
+    "train.csv": "0d0132d7a1edd3c066ea2f8934fc727ed0716397b8de4b1fb70a7ef414540325"
+  },
+  "test_usage": "evaluation only; no model/threshold selection",
+  "thread_limit": 1,
+  "training_recipe_version": "1.0"
+}

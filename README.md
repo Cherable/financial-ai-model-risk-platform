@@ -4,7 +4,97 @@
 
 英文项目名：Financial AI Model Risk Platform。仓库内容以中文设计文档为主，适用于金融科技与人工智能方向的双人课程项目。
 
-**当前交付状态：已形成设计与操作文档，尚未实现业务代码、安装软件或执行系统性能测试。文中的目标、接口和启动命令属于待实施方案。**
+**当前交付状态：成员 A 的 A1—A5 已完成。已具备数据、模型、评分/激活 API、独立监测 worker，以及模型、监测、告警页面。累计 108 项测试通过；B 的正式平台集成仍待完成，性能目标仍待实测。**
+
+## 需求说明书
+
+[软件需求说明书](docs/软件需求说明书.md)按照本地参考说明书组织，覆盖 A1—A5 与 B1—B4。V1.0 并入成员 B 的身份、审计与复现需求（第 11—16 章）。
+
+[下载可编辑 Word 版](docs/金融AI模型风险监测与审计平台软件需求说明书.docx)。Word 由 `docs/build_requirements_docx.py` 从 Markdown 生成，修改后重新运行脚本即可。
+
+## 双人合作
+
+- [任务分工与实际进度](docs/02-双人分工与实施步骤.md)
+- [B 接手命令、适配器交接与八项联调案例](docs/07-双人协作与集成验收.md)
+- [分支与交叉检查约定](CONTRIBUTING.md)
+
+A1—A5 已实现，B 正式平台与双人联调按实际执行结果登记。
+
+## A5 实施入口
+
+- [页面启动、操作、重试语义与交接](docs/A5-页面操作与交接.md)
+- [业务与逻辑架构、一级数据流图](docs/A5-业务与逻辑架构.md)
+- [实际浏览器图文验证](docs/A5-图文验证记录.md)
+- [当前完整依赖锁文件](requirements-a5.lock.txt)
+- [A1—A5 全量回归结果](evidence/A5-validation-summary.json)
+
+启动 API 和 Worker 后，运行 `python -m streamlit run streamlit_app.py`，访问本地 8501 端口。隔离演示可运行 `python -m scripts.preview_a5`，详见 A5 操作说明。
+
+## A4 实施入口
+
+- [A4 运行、计算口径、恢复与验收](docs/A4-监测worker与验收.md)
+- [独立进程验收证据](evidence/A4-worker-smoke.json)
+- [完整回归结果](evidence/A4-validation-summary.json)
+
+先启动下方 A3 API，然后在同一项目目录的另一终端运行：
+
+```powershell
+$env:DATABASE_URL = 'sqlite:///./data/runtime/platform.db'
+$env:ARTIFACT_ROOT = './artifacts'
+.\.venv\Scripts\python.exe -m app.worker
+```
+
+独立复验使用 `python -m scripts.verify_a4_worker`；该脚本自建临时服务和凭据，包含明确标注的测试时钟推进，不是性能测试。
+
+## A3 实施入口
+
+- [A3 接口操作、事务语义与交接](docs/A3-接口操作与交接.md)
+- [A3 历史依赖锁文件](requirements-a3.lock.txt)
+- [成功、失败与 outbox 的真实 HTTP 样例](evidence/A3-http-smoke.json)
+
+先按 A3 文档配置两枚本地演示令牌，再启动：
+
+```powershell
+.\.venv\Scripts\python.exe -m uvicorn app.main:create_app --factory --host 127.0.0.1 --port 8000
+```
+
+独立复验（脚本自建临时令牌、服务和数据库并自动关闭）：
+
+```powershell
+.\.venv\Scripts\python.exe -m scripts.verify_a3_http
+.\.venv\Scripts\python.exe -m scripts.run_acceptance
+```
+
+## A2 实施入口
+
+- [A2 完成记录、实测指标与交接](docs/A2-完成记录与交接清单.md)
+- [固定版本模型包说明](artifacts/README.md)
+- [评分示例输入](examples/A2-score-input.json)
+
+项目 `.venv` 已安装模型依赖，在根目录可执行：
+
+```powershell
+.\.venv\Scripts\python.exe -m scripts.verify_model --version credit-logreg-v1
+.\.venv\Scripts\python.exe -m scripts.score_model --version credit-logreg-v1 --input examples/A2-score-input.json
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
+```
+
+其他机器使用 [A2 锁文件](requirements-a2.lock.txt)安装依赖并核对 Python 版本；已交付模型的加载环境需与包内 environment.json 一致，详见 A2 说明。
+
+## A1 实施入口
+
+- [A1 完成记录与交接清单](docs/A1-完成记录与交接清单.md)
+- [监测需求与五类用例](docs/A1-监测需求与用例.md)
+- [合成数据说明与运行命令](data/README.md)
+
+在项目根目录使用 Python 3.12 执行：
+
+```powershell
+py -3.12 -m scripts.validate_data
+py -3.12 -m unittest discover -s tests -p test_data_preparation.py -v
+```
+
+A1 的数据生成与校验只依赖 Python 标准库；A2 和完整测试需要模型依赖。默认数据已生成；重新生成请使用新的 `--output` 目录，详见数据说明。
 
 ## 文档导航
 

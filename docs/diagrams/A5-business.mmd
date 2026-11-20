@@ -1,0 +1,15 @@
+flowchart LR
+  Dev[模型开发人员] -->|离线训练与锁定版本| Register[模型包验证与登记]
+  Admin[管理员] --> Activate[激活受信任版本]
+  Register --> Activate
+  Caller[模拟评分调用方] --> Score[评分与解释快照]
+  Activate --> Score
+  Score --> Evidence[评分 审计 Outbox 同事务留存]
+  Evidence --> Monitor[独立监测与窗口结算]
+  Risk[风险管理人员] --> Rules[配置未来规则版本]
+  Rules --> Monitor
+  Monitor --> Alert[生成或修订告警证据]
+  Alert --> Handle[认领 核查 说明后关闭]
+  Risk --> Handle
+  Handle --> History[保留修订与处置历史]
+  History -.成员 B 待接入.-> Audit[正式审计查询与复现]

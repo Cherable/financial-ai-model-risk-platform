@@ -6,6 +6,10 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+tests/.a1-test-*/
+tests/.a2-test-*/
+tests/.a3-test-*/
+tests/.a4-test-*/
 .coverage
 htmlcov/
 
@@ -24,6 +28,8 @@ htmlcov/
 *.sqlite3
 *.sqlite3-*
 *.joblib
+!artifacts/credit-logreg-v1/pipeline.joblib
+!artifacts/credit-logreg-v2/pipeline.joblib
 *.pkl
 data/runtime/
 evidence/private/
@@ -31,9 +37,21 @@ exports/
 *.log
 
 # Generated files and OS metadata
+tests/.a5-test-*/
 dist/
 build/
 *.egg-info/
 Thumbs.db
 .DS_Store
 ~$*
+
+# uv 管理的项目内 Python 3.12.14
+.python/
+
+# 课程提供的报告模板与本地预览产物（模板不随仓库分发）
+report/报告模板.doc
+report/报告模板.docx
+report/preview.pdf
+
+# 本地浏览器预览配置
+.claude/

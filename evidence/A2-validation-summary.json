@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-04",
+  "scope": "A2 model packages and regression tests",
+  "environment": {
+    "python": "3.12.14",
+    "implementation": "CPython",
+    "system": "Windows",
+    "machine": "AMD64",
+    "packages": {
+      "cloudpickle": "3.1.2",
+      "joblib": "1.6.0",
+      "narwhals": "2.28.0",
+      "numpy": "2.5.4",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1",
+      "threadpoolctl": "3.7.0"
+    }
+  },
+  "unit_tests": {
+    "command": "python -m unittest discover -s tests -v",
+    "run": 27,
+    "passed": 27,
+    "failures": 0,
+    "errors": 0
+  },
+  "pip_check": "No broken requirements found.",
+  "model_verifications": [
+    {
+      "version": "credit-logreg-v1",
+      "manifest_sha256": "b5fc62c8277974676c53eab3a55945538d90f0c874cdc664bfcdfc2084eefa0a",
+      "passed": true,
+      "cases": 5,
+      "max_absolute_error": 0.0,
+      "environment_and_all_file_hashes_checked_before_loading": true
+    },
+    {
+      "version": "credit-logreg-v2",
+      "manifest_sha256": "054de9de21b6e22399653eb7199f599f4c7e5106f3a3c100eb274153c7328220",
+      "passed": true,
+      "cases": 5,
+      "max_absolute_error": 0.0,
+      "environment_and_all_file_hashes_checked_before_loading": true
+    }
+  ],
+  "manual_member_b_review": "pending",
+  "http_api_and_database_persistence": "not implemented"
+}

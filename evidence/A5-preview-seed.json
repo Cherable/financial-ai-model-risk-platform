@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "synthetic_predictions": 40,
+  "metrics": 15,
+  "alerts": 1,
+  "test_clock_advance_seconds": 120,
+  "source_timestamps_modified": false,
+  "performance_benchmark": false
+}

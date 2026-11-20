@@ -1,0 +1,116 @@
+{
+  "model_version": "credit-logreg-v1",
+  "manifest_sha256": "b5fc62c8277974676c53eab3a55945538d90f0c874cdc664bfcdfc2084eefa0a",
+  "risk_probability": 0.3088120976806297,
+  "decision_threshold": 0.5,
+  "decision": "below_threshold",
+  "original_input": {
+    "customer_ref": "SYN-A2-DEMO-000001",
+    "age": 35,
+    "monthly_income": "8000.00",
+    "debt_income_ratio": 0.4,
+    "past_due_count": 1,
+    "loan_amount": "100000.00",
+    "employment_years": 10
+  },
+  "normalized_input": {
+    "age": 35,
+    "monthly_income": "8000.00",
+    "debt_income_ratio": 0.4,
+    "past_due_count": 1,
+    "loan_amount": "100000.00",
+    "employment_years": 10.0
+  },
+  "missing_fields": [],
+  "explanation": {
+    "method": "standardized_linear_log_odds",
+    "intercept": -1.2856499498509533,
+    "log_odds": -0.8056787210950552,
+    "contributions": [
+      {
+        "feature": "age",
+        "original_value": 35,
+        "was_missing": false,
+        "imputed_value": 35.0,
+        "standardized_value": -0.7807073816110527,
+        "coefficient": -0.052552245832557444,
+        "log_odds_contribution": 0.04102792624171628
+      },
+      {
+        "feature": "monthly_income",
+        "original_value": "8000.00",
+        "was_missing": false,
+        "imputed_value": 8000.0,
+        "standardized_value": -0.20992697646891803,
+        "coefficient": -0.40288517481669645,
+        "log_odds_contribution": 0.08457646661342057
+      },
+      {
+        "feature": "debt_income_ratio",
+        "original_value": 0.4,
+        "was_missing": false,
+        "imputed_value": 0.4,
+        "standardized_value": -0.398770440095002,
+        "coefficient": 0.7151285997268901,
+        "log_odds_contribution": -0.2851721464376145
+      },
+      {
+        "feature": "past_due_count",
+        "original_value": 1,
+        "was_missing": false,
+        "imputed_value": 1.0,
+        "standardized_value": 1.2371999103369826,
+        "coefficient": 0.2991575907716462,
+        "log_odds_contribution": 0.37011774447930845
+      },
+      {
+        "feature": "loan_amount",
+        "original_value": "100000.00",
+        "was_missing": false,
+        "imputed_value": 100000.0,
+        "standardized_value": -0.18274246016992707,
+        "coefficient": 0.5637233845891946,
+        "log_odds_contribution": -0.10301619815514737
+      },
+      {
+        "feature": "employment_years",
+        "original_value": 10.0,
+        "was_missing": false,
+        "imputed_value": 10.0,
+        "standardized_value": -0.3957341367403007,
+        "coefficient": -0.9411304242843865,
+        "log_odds_contribution": 0.37243743601421464
+      }
+    ],
+    "top_factors": [
+      {
+        "feature": "employment_years",
+        "original_value": 10.0,
+        "was_missing": false,
+        "imputed_value": 10.0,
+        "standardized_value": -0.3957341367403007,
+        "coefficient": -0.9411304242843865,
+        "log_odds_contribution": 0.37243743601421464
+      },
+      {
+        "feature": "past_due_count",
+        "original_value": 1,
+        "was_missing": false,
+        "imputed_value": 1.0,
+        "standardized_value": 1.2371999103369826,
+        "coefficient": 0.2991575907716462,
+        "log_odds_contribution": 0.37011774447930845
+      },
+      {
+        "feature": "debt_income_ratio",
+        "original_value": 0.4,
+        "was_missing": false,
+        "imputed_value": 0.4,
+        "standardized_value": -0.398770440095002,
+        "coefficient": 0.7151285997268901,
+        "log_odds_contribution": -0.2851721464376145
+      }
+    ],
+    "caveat": "Additive log-odds contributions, not causal effects or probability changes."
+  }
+}

@@ -1,0 +1,9 @@
+%%{init: {"flowchart": {"wrappingWidth": 560, "nodeSpacing": 30, "rankSpacing": 40}}}%%
+flowchart TB
+  P["<b>① 表现层</b>　Streamlit 1.66.1<br/>模型版本 · 监测指标 · 告警处置 · 审计查询 · 复现任务<br/>ApiClient（httpx，10s 总超时 / 3s 连接超时，不自动重试）"]
+  I["<b>② 接口层</b>　FastAPI 0.162.0 + Pydantic 2.14<br/>路由与输入校验 · Bearer 身份解析<br/>Idempotency-Key 校验 · 统一错误映射"]
+  S["<b>③ 应用服务层</b>　纯 Python<br/>PredictionService（评分与激活）<br/>MonitoringWorker（事件消费与窗口结算）· 告警命令与规则版本"]
+  D["<b>④ 领域逻辑</b>　scikit-learn 1.9.1 · NumPy 2.5.4<br/>特征规范化与范围校验 · 固定 Pipeline 推理与解释快照<br/>窗口统计（缺失率、PSI、失败率、P95）· 规则求值与告警修订"]
+  A["<b>⑤ 适配器边界</b>　可替换协议<br/>PredictionStore 协议 → SqlitePredictionStore<br/>Authenticator 协议 → DemoTokenAuthenticator"]
+  R["<b>⑥ 资源层</b>　本地文件<br/>SQLite 运行库（WAL）· 模型包目录 · 合成数据与验证记录"]
+  P --> I --> S --> D --> A --> R

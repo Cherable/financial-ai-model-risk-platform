@@ -1,0 +1,24 @@
+{
+  "accuracy": 0.786,
+  "brier_score": 0.15163805190028887,
+  "confusion_matrix_true_rows_predicted_columns": [
+    [
+      691,
+      50
+    ],
+    [
+      164,
+      95
+    ]
+  ],
+  "dataset": "held_out_synthetic_test",
+  "f1": 0.47029702970297027,
+  "limitation": "Synthetic data only; no real credit performance or calibration claim.",
+  "log_loss": 0.4603929440388091,
+  "majority_class_accuracy": 0.741,
+  "precision": 0.6551724137931034,
+  "recall": 0.3667953667953668,
+  "roc_auc": 0.7978574294363768,
+  "rows": 1000,
+  "threshold": 0.5
+}

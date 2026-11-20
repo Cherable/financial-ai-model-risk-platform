@@ -1,0 +1,13 @@
+{
+  "registry_format": "1.0",
+  "versions": {
+    "credit-logreg-v1": {
+      "manifest_sha256": "b5fc62c8277974676c53eab3a55945538d90f0c874cdc664bfcdfc2084eefa0a",
+      "pipeline_sha256": "009f3d3638a0ce08df0ba7b904cd8af8a6ea41a1f81fb53b20c99013d7582391"
+    },
+    "credit-logreg-v2": {
+      "manifest_sha256": "054de9de21b6e22399653eb7199f599f4c7e5106f3a3c100eb274153c7328220",
+      "pipeline_sha256": "b51302f4e539e37b67ff90d91c42ab50ab3aceb717e20421d6ba1540f3ecf8e5"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "baseline": "zero standardized vector; intercept is its log-odds",
+  "formula": "log_odds = intercept + sum(standardized_feature * coefficient)",
+  "method": "standardized_linear_log_odds",
+  "missing": "median imputation; preserve original missing fields",
+  "not_causal": true,
+  "top_k": 3,
+  "units": "log_odds"
+}

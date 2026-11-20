@@ -1,0 +1,19 @@
+flowchart TB
+  Browser[浏览器] --> UI[Streamlit 会话与三个页面]
+  UI -->|HTTP JSON 与 Bearer| API[FastAPI 请求校验与身份解析]
+  API --> Scope[角色与模型范围校验]
+  Scope --> Models[模型版本与激活服务]
+  Scope --> Score[评分服务]
+  Scope --> Query[指标 规则 告警查询与处置]
+  Models --> Store[SQLite 存储适配器]
+  Score --> Store
+  Query --> Store
+  Models --> Bundle[受信任模型包加载器]
+  Score --> Bundle
+  Bundle --> Files[固定模型包 与参考分布]
+  Store --> DB[(同一 SQLite 数据库)]
+  Worker[独立 Python Worker] -->|租约与消费检查点| DB
+  Worker --> Stats[窗口统计与冻结规则求值]
+  Stats --> Files
+  Stats -->|修订 CAS 原子发布| DB
+  B[成员 B 正式 JWT 存储 审计 复现] -.待集成替换适配器.-> API

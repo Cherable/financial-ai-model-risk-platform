@@ -1,0 +1,8 @@
+{
+  "version": "credit-logreg-v1",
+  "manifest_sha256": "b5fc62c8277974676c53eab3a55945538d90f0c874cdc664bfcdfc2084eefa0a",
+  "passed": true,
+  "cases": 5,
+  "max_absolute_error": 0.0,
+  "environment_and_all_file_hashes_checked_before_loading": true
+}

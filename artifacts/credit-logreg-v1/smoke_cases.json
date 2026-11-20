@@ -1,0 +1,66 @@
+[
+  {
+    "expected_decision": "at_or_above_threshold",
+    "expected_probability": 0.5347258563433248,
+    "input": {
+      "age": "34",
+      "customer_ref": "SYN-test-000001",
+      "debt_income_ratio": "0.708887",
+      "employment_years": "1.97",
+      "loan_amount": "55978.64",
+      "monthly_income": "2865.65",
+      "past_due_count": "0"
+    }
+  },
+  {
+    "expected_decision": "below_threshold",
+    "expected_probability": 0.3335660977142645,
+    "input": {
+      "age": "34",
+      "customer_ref": "SYN-test-000002",
+      "debt_income_ratio": "0.737521",
+      "employment_years": "15.56",
+      "loan_amount": "261563.85",
+      "monthly_income": "18368.68",
+      "past_due_count": "0"
+    }
+  },
+  {
+    "expected_decision": "at_or_above_threshold",
+    "expected_probability": 0.8007361807966354,
+    "input": {
+      "age": "29",
+      "customer_ref": "SYN-test-000003",
+      "debt_income_ratio": "1.123373",
+      "employment_years": "1.06",
+      "loan_amount": "171143.50",
+      "monthly_income": "9944.84",
+      "past_due_count": "0"
+    }
+  },
+  {
+    "expected_decision": "below_threshold",
+    "expected_probability": 0.43922203618236305,
+    "input": {
+      "age": "34",
+      "customer_ref": "SYN-test-000001",
+      "debt_income_ratio": "0.708887",
+      "employment_years": "1.97",
+      "loan_amount": "55978.64",
+      "monthly_income": null,
+      "past_due_count": "0"
+    }
+  },
+  {
+    "expected_decision": "below_threshold",
+    "expected_probability": 0.21458797852068687,
+    "input": {
+      "age": null,
+      "debt_income_ratio": null,
+      "employment_years": null,
+      "loan_amount": null,
+      "monthly_income": null,
+      "past_due_count": null
+    }
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "model_version_id": "ef31e86c-44a0-5925-bb71-26c41da39d32",
+  "input": {
+    "customer_ref": "SYN-A3-DEMO-000001",
+    "age": 35,
+    "monthly_income": "8000.00",
+    "debt_income_ratio": 0.4,
+    "past_due_count": 1,
+    "loan_amount": "100000.00",
+    "employment_years": 10
+  }
+}
